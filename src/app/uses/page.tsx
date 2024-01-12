@@ -54,8 +54,7 @@ export default function Uses() {
               new Date('2018-09-01T00:00:00.000Z').getFullYear()}{' '}
             years ago when I built the cheapest PC I could to play games on.
             Over the years I’ve upgraded it piece by piece until it’s become the
-            beast it is today. I’m not going to list out all of the parts
-            because it’s a lot but I will say that the CPU is an AMD Ryzen 9
+            beast it is today. CPU is an AMD Ryzen 9
             5950X and the GPU is an NVIDIA GeForce RTX 3080. I use an ultrawide
             monitor to see more errors, I mean code, at once.
           </Tool>
@@ -73,47 +72,30 @@ export default function Uses() {
           </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">
-          <Tool title="Sublime Text 4">
-            I don’t care if it’s missing all of the fancy IDE features everyone
-            else relies on, Sublime Text is still the best text editor ever
-            made.
+          <Tool title="Visual Studio Code">
+            Are you a Vim user reading this that think's you're better than me? Well, you're probably right. But I'm not going to let that stop me. Vim keybinds work just fine in VS Code. Plus, I can have an extension for just about everything I need! For example, hiding the sacreligiously long lines of tailwind classes.
           </Tool>
-          <Tool title="iTerm2">
-            I’m honestly not even sure what features I get with this that aren’t
-            just part of the macOS Terminal but it’s what I use.
+          <Tool title="Git">
+            Really need to read this one? I mean, it's Git. You know what it is.
           </Tool>
-          <Tool title="TablePlus">
-            Great software for working with databases. Has saved me from
-            building about a thousand admin interfaces for my various projects
-            over the years.
+          <Tool title="Unholy amounts of caffiene">
+            I'm not sure if this counts as a development tool but it's definitely a requirement. I'm a big fan of the Starbucks Nitro Cold Brew. It's like a beer but without the hangover. I also like to drink a lot of water. I'm not sure if it helps but it can't hurt.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Design">
-          <Tool title="Figma">
-            We started using Figma as just a design tool but now it’s become our
-            virtual whiteboard for the entire company. Never would have expected
-            the collaboration features to be the real hook.
+          <Tool title="Whiteboard">
+            Can't beat a good old fashioned whiteboard. If you're reading this far by the way, I'm impressed! Here's a fun joke as a reward: What do you call a cow with no legs? Ground beef.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
-          <Tool title="Alfred">
-            It’s not the newest kid on the block but it’s still the fastest. The
-            Sublime Text of the application launcher world.
+          <Tool title="Obsidian">
+            Markdown based note taking app that I use for everything. Either this or I just hope that I remember it. I’m not sure which is better. I mainly chose Obsidian because other programmers use it and I want to be cool like them. Markdown also happens to be my preference for writing everything so it works out.
           </Tool>
-          <Tool title="Reflect">
-            Using a daily notes system instead of trying to keep things
-            organized by topics has been super powerful for me. And with
-            Reflect, it’s still easy for me to keep all of that stuff
-            discoverable by topic even though all of my writing happens in the
-            daily note.
+          <Tool title="ClickUp">
+            If I had a nickel for every time I shilled for ClickUp I'd have exactly zero nickels because they don't pay me. I just really like the product. It's a great way to keep track of all of the things I need to do and it's flexible enough to work with my workflow.
           </Tool>
-          <Tool title="SavvyCal">
-            Great tool for scheduling meetings while protecting my calendar and
-            making sure I still have lots of time for deep work during the week.
-          </Tool>
-          <Tool title="Focus">
-            Simple tool for blocking distracting websites when I need to just do
-            the work and get some momentum going.
+          <Tool title="iCal">
+            Good old fashioned calendar app. If something is on my calendar it’s going to get done. I don’t know why but it’s just how my brain works. I use it for everything from meetings to reminders to when I need to take out the trash.
           </Tool>
         </ToolsSection>
       </div>
