@@ -47,30 +47,29 @@ export default function Uses() {
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
-          <Tool title="16” MacBook Pro, M1 Max, 64GB RAM (2021)">
-            I was using an Intel-based 16” MacBook Pro prior to this and the
-            difference is night and day. I’ve never heard the fans turn on a
-            single time, even under the incredibly heavy loads I put it through
-            with our various launch simulations.
+          <Tool title="Custom Built PC">
+            Blood, sweat, and tears went into building this thing. It started
+            around{' '}
+            {new Date().getFullYear() -
+              new Date('2018-09-01T00:00:00.000Z').getFullYear()}{' '}
+            years ago when I built the cheapest PC I could to play games on.
+            Over the years I’ve upgraded it piece by piece until it’s become the
+            beast it is today. I’m not going to list out all of the parts
+            because it’s a lot but I will say that the CPU is an AMD Ryzen 9
+            5950X and the GPU is an NVIDIA GeForce RTX 3080. I use an ultrawide
+            monitor to see more errors, I mean code, at once.
           </Tool>
-          <Tool title="Apple Pro Display XDR (Standard Glass)">
-            The only display on the market if you want something HiDPI and
-            bigger than 27”. When you’re working at planetary scale, every pixel
-            you can get counts.
+          <Tool title="Surface Book 2">
+            This little feller overtime has turned into my daily driver. In fact, my PC is mostly just a gaming machine now and I couldn't tell you the last time I booted up an old favorite. The Surface lets me draft ideas quickly which is vital for designing web apps and API architectures. It's also a great way to get away from my desk and work from a local coffee shop. It's a niche device and I happen to fit that niche perfectly.
           </Tool>
-          <Tool title="IBM Model M SSK Industrial Keyboard">
-            They don’t make keyboards the way they used to. I buy these any time
-            I see them go up for sale and keep them in storage in case I need
-            parts or need to retire my main.
+          <Tool title="Custom Keyboard">
+            If you are not yet a mechanical keyboard snob, I highly recommend not going down this rabbit hole. It’s a deep one. I’ve built a few keyboards over the years but my current daily driver is a 60% keyboard with lubed Sunflower tactile switches and a brass plate. GMK keycaps too of course. They say the better the keyboard sounds the better the code you write. I’m not sure if that’s true but I do know that I love the sound of this thing.
           </Tool>
-          <Tool title="Apple Magic Trackpad">
-            Something about all the gestures makes me feel like a wizard with
-            special powers. I really like feeling like a wizard with special
-            powers.
+          <Tool title="Stack of Schiit">
+            Modius, Magnius, Lokius. The Schiit stack. I’m not an audiophile but I do like to listen to music while I work and this stack is a great way to do that. I’m using a pair of Sundaras with it. As for albums, Mint Jams by Casiopea is my go to for quality. For personal taste though, MUSE wins every time. Anything is better than the voices in my head.
           </Tool>
-          <Tool title="Herman Miller Aeron Chair">
-            If I’m going to slouch in the worst ergonomic position imaginable
-            all day, I might as well do it in an expensive chair.
+          <Tool title="Costco Folding Chair">
+            No joke, this is the most comfortable chair I’ve ever owned. I've tried a Herman Miller and a Steelcase and I still prefer this one. Best ten bucks I ever spent.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">

@@ -162,7 +162,7 @@ function Role({ role }: { role: Role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none shadow-md items-center justify-center rounded-full bg-white dark:ring-0">
+      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md dark:ring-0">
         <Image src={role.logo} alt="" className="h-9 w-9" unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
@@ -179,9 +179,15 @@ function Role({ role }: { role: Role }) {
           className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
           aria-label={`${startLabel} until ${endLabel}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
+          <time dateTime={startDate}>{startLabel}</time>
+          {endDate && (
+            <>
+              {' '}
+              <span aria-hidden="true">—</span>
+              {' '}
+              <time dateTime={endDate}>{endLabel}</time>
+            </>
+          )}
         </dd>
       </dl>
     </li>
@@ -211,46 +217,22 @@ function Resume() {
       company: 'Comet Labs',
       title: 'Research Intern',
       logo: logoCometLabs,
-      start: '2019',
-      end: '2020',
+      start: 'Spring of 2018',
+      end: '',
     },
     {
       company: 'Promptlink',
       title: 'Research Intern',
       logo: logoPromptlink,
-      start: '2019',
-      end: '2020',
+      start: 'Spring of 2017',
+      end: '',
     },
     {
-      company: 'Planetaria',
-      title: 'CEO',
-      logo: logoPlanetaria,
-      start: '2019',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
-    },
-    {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
-    },
-    {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
+      company: 'Promptlink',
+      title: 'Research Intern',
+      logo: logoPromptlink,
+      start: 'Spring of 2016',
+      end: '',
     },
   ]
 
