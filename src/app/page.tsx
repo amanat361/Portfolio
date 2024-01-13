@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import Piano from '@/components/Piano'
 import {
   GitHubIcon,
   InstagramIcon,
@@ -179,8 +180,7 @@ function Role({ role }: { role: Role }) {
           {endDate && (
             <>
               {' '}
-              <span aria-hidden="true">—</span>
-              {' '}
+              <span aria-hidden="true">—</span>{' '}
               <time dateTime={endDate}>{endLabel}</time>
             </>
           )}
@@ -312,6 +312,9 @@ export default async function Home() {
               icon={LinkedInIcon}
             />
           </div>
+        </div>
+        <div className="mt-6">
+          <Piano />
         </div>
       </Container>
       <Photos />
