@@ -3,47 +3,73 @@ import Image from 'next/image'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import logoVirtualStaging from '@/images/logos/virtualStaging.webp'
+import logoChromeGuide from '@/images/logos/chrome.png'
+import logoTheCoderSchool from '@/images/logos/theCoderSchool.png'
+import logoApollo from '@/images/logos/apollo.webp'
+import logoAssembly from '@/images/logos/assembly.png'
+import logoMrBubbles from '@/images/logos/mrBubbles.webp'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'AI Virtual Staging',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+      'SaaS tool for virtually staging real estate photos in seconds at only a fraction of the cost of traditional staging methods. Over 30 monthly active (and happy) users. Built with React, Next.js, and Tailwind CSS, and deployed on Vercel.',
+    link: {
+      href: 'https://www.virtualstaging.art/',
+      label: 'virtualstaging.art',
+    },
+    logo: logoVirtualStaging,
   },
   {
-    name: 'Animaginary',
+    name: 'TCS Tracker Ultra',
     description:
-      'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
+      'A feature-rich admin dashboard for instructors at theCoderSchool. It syncs with any Pike13 account to provide a real-time view of all students, and uses LLM technology to write progress reports in seconds.',
+    link: {
+      href: 'https://tcstracker.netlify.app/',
+      label: 'tcstracker.netlify.app',
+    },
+    logo: logoTheCoderSchool,
   },
   {
-    name: 'HelioStream',
+    name: 'Apollo Exterior Care',
     description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
+      'Gorgeous landing page for a local power washing business. Mobile-first UI/UX components provide a quick way for customers to find what they need right away. Vercel image optimization keeps things snappy on the go.',
+    link: {
+      href: 'https://www.apolloexteriorcare.com/',
+      label: 'apolloexteriorcare.com',
+    },
+    logo: logoApollo,
   },
   {
-    name: 'cosmOS',
+    name: 'Mr. Bubbles Auto Detailing',
     description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
+      'Full stack booking system for a local auto detailing business. Customers can book appointments, pay for services, and view detailed package information. Reviews are pulled from Google and Yelp and displayed on the site.',
+    link: {
+      href: 'https://mr-bubbles.vercel.app/',
+      label: 'mr-bubbles.vercel.app',
+    },
+    logo: logoMrBubbles,
   },
   {
-    name: 'OpenShuttle',
+    name: 'Chrome Extension Guide',
     description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'I taught one of my students how to make a chrome extension, that later turned into this interactive web guide where anyone can build it. Markdoc turns MDX into stunning documentation with a built-in code display.',
+    link: {
+      href: 'https://text-changer-guide.vercel.app/',
+      label: 'text-changer-guide.vercel.app',
+    },
+    logo: logoChromeGuide,
+  },
+  {
+    name: 'FredBot',
+    description:
+      'The best Discord bot in history. He is able to access Canvas LMS and send notifications to students in real-time for CS265 (Assembly Language). He is also the only Discord bot to emulate an x86 CPU and run MASM natively.',
+    link: {
+      href: 'https://replit.com/@SaminAmanat/fredBot',
+      label: 'FredBot on Replit',
+    },
+    logo: logoAssembly,
   },
 ]
 
@@ -67,7 +93,7 @@ export default function Projects() {
   return (
     <SimpleLayout
       title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are for Firewave clients, so if you see something that piques your interest, please reach out to hear more about it! Let's put your dream idea on the list next."
     >
       <ul
         role="list"
