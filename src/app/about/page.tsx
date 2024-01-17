@@ -50,7 +50,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I’m Spencer Sharp. I live in New York City, where I design the future.',
+    'I’m Sam, a software engineer and entrepreneur from Walnut Creek, California. I’m currently building Firewave, a software development agency that helps startups and small businesses build their ideas.',
 }
 
 export default function About() {
@@ -69,9 +69,12 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            I’m Sam. I'm from the Bay. I look for hard problems to solve.
+            Just a guy who likes playing with toys.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+            <p>
+              ooo
+            </p>
             <p>
               I have a formal background in computer science from my degree, but I'm mostly self-taught. Fortunately, my techy cousins got me into programming when I was young, and I havn't stopped building since then. I've worked with a few startups, enterprise, local businesses, and the rest. Each problem is unique, and I love that.
             </p>
