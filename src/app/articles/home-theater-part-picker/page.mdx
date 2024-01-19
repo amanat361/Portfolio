@@ -1,0 +1,97 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import htpartpicker from './htpartpicker.png'
+import catalyst from './catalyst.png'
+import pcpartpicker from './pcpartpicker.png'
+import mytheater from './mytheater.jpg'
+import comingtogether from './comingtogether.jpg'
+import davidgoggins from './davidgoggins.jpg'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2024-01-19',
+  title: 'What if designing a Home Theater was as easy as building a PC?',
+  description:
+    'Lets create HT Part Picker, a site where you can piece together all the components you need for a dream theater without the cost of hiring someone to do it instead.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={mytheater} alt="" />
+
+## Inspiration
+
+TailwindUI has some absolutely gorgeous React components. Right before the holidays they released [Catalyst](https://tailwindui.com/templates/catalyst) which are a brand new set of UI components. As soon as I saw this, I got very excited, but then quickly forgot about it because Christmas and [my birthday](https://www.britannica.com/on-this-day/December-27) were right around the corner. Fast forward a bit and I come across it yet again. Turns out, just as you would guess, the folks at Tailwind have done it yet again. 
+
+From taking a look at [the buttons](https://catalyst.tailwindui.com/docs/button) alone, I had to make something out of this. Literally anything. I just had to use these buttons. So I decided to make a site that would allow you to piece together all the components you need for a dream theater without the cost of hiring someone to do it instead.
+
+<Image src={catalyst} alt="" />
+
+## PC Part Picker
+
+If you do not already know, [PC Part Picker](https://pcpartpicker.com/) is one of the coolest websites ever made. When I was just a kid, I would spend hours on this site, piecing together [my dream computer](https://www.saminamanat.com/uses). I remember picking the most expensive parts possible that I would clearly never use just to see what was possible. In all honesty, if not for this website, I might not have gotten into computers at all.
+
+It works by giving you a structured list of the core components of a computer so that you can pick your parts without having to [scatter around the internet](https://uploads.dailydot.com/2023/11/charlie-day-meme.jpg?auto=compress&fm=pjpg). It also has a compatibility checker that will let you know if you are missing something or if something is not compatible with the rest of your build. Best of all, for each part, it will show you the best price from all the major retailers. Whether its your first build or your 100th, this site is a must.
+
+<Image src={pcpartpicker} alt="" />
+
+## The Idea
+
+Okay so then I thought, what if we could do the same thing for home theaters? A huge chunk of people in the hobby have enough cash to hire someone to do it for them, but what about the rest of us? I have been in the hobby for a few years now and it turns out that its not as hard as you might think. There are a few core components that you need to get right and then the rest is just a matter of preference. If we could make a site that would allow you to pick the core components and then give you a list of the best options for the rest, that would open up the hobby to so many more people.
+
+Home Theaters are shockingly analogous to computers. For a standard gaming PC, you need a CPU, GPU, RAM, Storage, and a Power Supply. For a standard home theater, you need a TV, Receiver, Speakers, Subwoofer, and a Streaming Device. I know this is a simplified example but the point is that there is definitely a structure to a good home theater which is more than capable of being replicated in a website.
+
+<Image src={htpartpicker} alt="" />
+
+## Research
+
+Something like this certainly exists right? The idea is so simple that I guarantee someone did it years ago. Well, I guess not! The closest thing I found was all the way from *5 years ago* and its [this post](https://www.reddit.com/r/hometheater/comments/cb4utp/build_you_own_home_theater_website_similar_to_pc/) on Reddit. The comments are full of people saying that they would love to see something like this but no one has actually pulled it off. [One user](https://www.reddit.com/r/hometheater/comments/cb4utp/comment/etda0v5/?utm_source=share&utm_medium=web2x&context=3) points out:
+>This sounds like a great idea considering they have already made a bike building site.
+
+There are plenty of other comments that say pretty much the same thing as [this guy](https://www.reddit.com/r/hometheater/comments/cb4utp/comment/etdbtw6/?utm_source=share&utm_medium=web2x&context=3) as well:
+>That's a pretty damn good idea. I can't see why it wouldn't work. Pcpartpicker is a great site.
+
+I could not be more excited to stumble upon this time capsule. It gets way better when you find out that the **guy who made PC Part Picker *himself*** added a [response](https://www.reddit.com/r/hometheater/comments/cb4utp/comment/etffl8d/?utm_source=share&utm_medium=web2x&context=3). I'll let you read it for yourself:
+
+<blockquote>
+We've contemplated it. Even bought a domain for it years ago. I've loved AV stuff - audio work growing up is what drove me to pursue a EE degree, which eventually led to a CE/CS degree and a lifelong electronics hobby. I used to model my own speakers, built my own amps and preamps, etc. Loved it. But having kids changes things a bit... :)
+
+Anyhow, based on the infrastructure we've built out for PC and cycling, it's certainly doable. Here's what we'd need to do:
+
+- Model out the components of interest, detailing specs and compatibility constraints - this defines the category view tables, filters, product page specs, etc.
+
+- Data entry for those components using the modeling. This takes a good bit of time, and for various reasons we only do it in house (so no community sourced component specs).
+
+- Site branding / styling. Each new niche we develop has it's own feel. Though similar, the font choices, colors, layout tweaks are all a bit tuned to the domain we're in.
+
+Modeling out components isn't too bad. If you need really tight compatibility checking it gets trickier, particularly if you're dealing with subtleties of whether component A fully supports component B (i.e. HDMI ARC, etc?). If compatibility isn't as important, then the modeling is really there more for comparable specs and filters.
+
+Data entry isn't hard if you have experience in the domain (which myself and at least four other of our staff do). What makes it difficult can be finding accurate spec data, identifiers (manufacturer part numbers, UPCs, EANs, etc), and the rate of new product additions. You can find data suppliers that you, say, pay $10k to for a data subscription and they provide all that, but the quality is often just slightly better than terrible. (Basically if you want to be just-another-price-comparison-site and don't care too much about good data/spec accuracy, it's a great fast way to go. We care a lot about our spec data and accuracy, so we do it all in house.) If you're in a niche where there are a ton of new products hitting the market every month, keeping up with the inflow can be tricky. On PC it usually comes in waves, like the recent AMD launch. Thanks, AMD, for releasing everything on a Sunday by the way - staff didn't need that weekend... lol.
+
+Site branding and styling usually happens in parallel to the data entry. After our responsive update it shouldn't be too bad, but that's easy to say because I'm not the one who does it. We have designers on staff who do that part, and they've worked hard to make it more easily adaptable in the new layout.
+
+The real question for us is whether we'd lose money on it long-term or not. If so, it wouldn't be viable for us to pursue. I'm not sure how strong the adoption would be - maybe it'd be great, but I honestly don't know. There'd be a decent investment in labor to get it bootstrapped with modeling and data. One hard part is that consumer electronics usually offer a very low commission rate like PC parts. It wouldn't be unreasonable to see rates 0.5% - 1.0% for non-amazon retailers. Whereas if you're referring clothing you can sometimes see affiliate commission rates of 10+%. I'm guessing the product addition rate would be high enough that we'd need a dedicated person for it. I'm not sure we could divide up time in our existing staff to pull it off... maybe so, but not sure.
+
+So in the end, it's on our "maybe" roadmap if that makes sense. It could be viable, but it'd take an upfront time/$$ investment to test it out to see if it could get traction and adoption.
+</blockquote>
+
+Well, there you have it. It's like in [TENET](https://youtu.be/Fc5VKd18uzQ) where they bury instructions so that they can find them in the future. Now we have the tools we need. We have [Catalyst](https://tailwindcss.com/blog/introducing-catalyst). We have server actions and partial prerendering in [Next.js 14](https://nextjs.org/blog/next-14). We have the [best database](https://supabase.com/) you could ever wish for. Someone just needs to put it all together.
+
+<Image src={comingtogether} alt="" />
+
+## The Plan
+
+After all, this is really a passion project that is not meant to be my next business venture. I'm doing it out of love for the Home Theater [community](https://www.reddit.com/r/hometheater/) and possibly to butter up that [portfolio](https://www.saminamanat.com/projects) in case someone's looking to hire a [full stack engineer](https://www.linkedin.com/in/samin-amanat/) 👀.
+
+I'm going to take it slow and see what it turns into one step at a time. Feedback is the most important part, you never truly know what you're building until you have your first user. I'm going to find a way to data warehouse all the products from all the major retailers as a starting point. If you know of any good resources for this, please [let me know](mailto:contact@saminamanat.com)!
+
+<Image src={davidgoggins} alt="" />
+
+## Thank You
+
+Stay tuned [here for the live site](https://www.htpartpicker.com/) and also [here for the code](https://github.com/amanat361/htpartpicker). Thanks for reading and I hope you're as excited as I am!
