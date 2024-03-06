@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+// @ts-ignore
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
@@ -69,20 +70,59 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Just a guy who likes playing with toys.
+            I like writing code and sometimes something cool comes out of it.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              ooo
+              I've been coding for over a decade now but the passion for it has
+              never died down. I still laugh looking at the commits of my{' '}
+              <a
+                href="https://github.com/amanat361/Reddit-Bot/commit/43817aa4160f18aff22c071af3f95f4ed20f0188"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                first
+              </a>{' '}
+              GitHub repo, trying to make a Reddit bot in Python. Things
+              haven&apos;t changed much.
             </p>
             <p>
-              I have a formal background in computer science from my degree, but I'm mostly self-taught. Fortunately, my techy cousins got me into programming when I was young, and I havn't stopped building since then. I've worked with a few startups, enterprise, local businesses, and the rest. Each problem is unique, and I love that.
+              My biggest passion is to build and to learn. Every day is a new
+              rabbit hole of trying some niche framework or arguing about
+              Tailwind on Twitter. But when I'm not doing that, I'm usually
+              working on{' '}
+              <a
+                className="underline"
+                href="https://firewave.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Firewave
+              </a>
+              , a software development agency that helps startups and small
+              businesses build their ideas.
             </p>
             <p>
-              What draws me into computer science is the even playing field it creates. You have the raw ability to create something from nothing. Engineering especially is built entirely on the concept of finding a problem and solving it. Computer science is no different.
-            </p>
-            <p>
-              Today, I’m the founder of Firewave, trying to solve problems that hold businesses back from growing. I have a few other projects in the works, but I'm not ready to share them yet. If you want to know more, feel free to reach out!
+              Recently me and my colleague put out{' '}
+              <a
+                className="underline"
+                href="https://www.virtualstaging.art/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VirtualStaging AI
+              </a>
+              , a tool for real estate professionals to stage a photo with
+              furniture in seconds. Now I'm set to build HT Part Picker, a tool
+              you can read my article about{' '}
+              <Link
+                className="underline"
+                href="/articles/home-theater-part-picker"
+              >
+                here
+              </Link>
+              .
             </p>
           </div>
         </div>

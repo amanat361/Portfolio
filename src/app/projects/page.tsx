@@ -9,8 +9,20 @@ import logoTheCoderSchool from '@/images/logos/theCoderSchool.png'
 import logoApollo from '@/images/logos/apollo.webp'
 import logoAssembly from '@/images/logos/assembly.png'
 import logoMrBubbles from '@/images/logos/mrBubbles.webp'
+import logoHTPartPicker from '@/images/logos/htpartpicker.webp'
+import logoRedditBot from '@/images/logos/reddit.png'
+import logoUnity from '@/images/logos/unity.jpg'
 
 const projects = [
+  {
+    name: 'HT Part Picker',
+    description: "The world’s only one stop shop for all your Home Theater needs. This website is a passion project currently in development. We are working hard to bring you the best experience possible.",
+    link: {
+      href: 'https://www.htpartpicker.com/',
+      label: 'htpartpicker.com',
+    },
+    logo: logoHTPartPicker,
+  },
   {
     name: 'AI Virtual Staging',
     description:
@@ -70,6 +82,25 @@ const projects = [
       label: 'FredBot on Replit',
     },
     logo: logoAssembly,
+  },
+  {
+    name: "Hex Immunitea",
+    description:
+      "A strategic attack and board game similar to Chess that uses a hexagonal board. Built in Unity and C#, it is a fun and challenging game that is easy to learn and hard to master.",
+    link: {
+      href: 'https://amanat361.github.io/game.html',
+      label: 'Play Hex Immunitea',
+    },
+    logo: logoUnity,
+  },
+  {
+    name: "Game Recommender",
+    description: "A reddit bot written in Python for recommending Steam Games. This is my first GitHub repo ever and shows my development journey being almost a decade long!",
+    link: {
+      href: 'https://github.com/amanat361/Reddit-Bot',
+      label: 'Reddit Bot GitHub',
+    },
+    logo: logoRedditBot,
   },
 ]
 
