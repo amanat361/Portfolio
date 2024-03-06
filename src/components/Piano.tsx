@@ -1,7 +1,7 @@
 'use client'
 
 import * as d3 from 'd3'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useKeypress from 'react-use-keypress'
 
 type Note = {
@@ -22,14 +22,27 @@ const notes = [
 ] as Note[]
 
 export default function Piano() {
+  const [timer, setTimer] = useState(0)
   const [currentNote, setCurrentNote] = useState<Note>(notes[0])
   const [score, setScore] = useState(0)
-  
+  const started = score > 0
+
   const randomNote = (): Note => {
     const newNote = notes[Math.floor(Math.random() * notes.length)]
     if (newNote === currentNote) return randomNote()
     return newNote
   }
+
+  useEffect(() => {
+    if (!started) return
+    const interval = setInterval(() => {
+      setTimer((currentTimer) => Math.round((currentTimer + 0.1) * 10) / 10)
+    }, 100)
+    return () => {
+      setTimer(0)
+      clearInterval(interval)
+    }
+  }, [started])
 
   useKeypress(
     notes.map((note) => note.letter),
@@ -60,9 +73,12 @@ export default function Piano() {
 
   return (
     <React.Fragment>
-      <div className="m-2 flex flex-row justify-end">
+      <div className="m-2 flex flex-row justify-end gap-4">
         <h1 className="text-xl text-zinc-900 dark:text-zinc-300">
           Score: {score}
+        </h1>
+        <h1 className="text-xl text-zinc-900 dark:text-zinc-300">
+          Timer: {timer.toFixed(1)}
         </h1>
       </div>
       <svg
@@ -78,7 +94,11 @@ export default function Piano() {
               width={noteWidth - 1}
               height={noteHeight}
               fill={keyColors(i)}
-              className={note === currentNote ? 'animate-pulse fill-black stroke-blue-500 dark:stroke-white stroke-[0.5]' : ''}
+              className={
+                note === currentNote
+                  ? 'animate-pulse fill-black stroke-blue-500 stroke-[0.5] dark:stroke-white'
+                  : ''
+              }
               onClick={() => handleNotePress(note)}
             />
             <text
