@@ -4,6 +4,10 @@ import thinking from './thinking.jpg'
 import meme from './meme.jpg'
 import bike from './bike.jpg'
 import handshake from './handshake.jpg'
+import tcstrackeroriginal from './tcstrackeroriginal.png'
+import tcstrackerultra from './tcstrackerultra.png'
+import htpartpicker from './htpartpicker.png'
+import virtualstaging from './virtualstaging.png'
 
 export const article = {
   author: 'Sam Amanat',
@@ -47,7 +51,38 @@ reminded me of the early days of the web, where we were all just figuring things
 
 ## Okay that's cool and all, but what about the job?
 
-Oh, right! Well, as I was playing around with Catalyst in early January, sadly, it seemed to be missing quite a few components! Likewise, TailwindUI has many fantastic components, however some lack dark theme support, consistency between pages, or even the modularity that Catalyst has spoiled me with. I decided why not build it myself, and so I did! I joked with my friends at the time, *"Man, if only they were hiring, I would love to help them just get this done. Maybe I should get a Tailwind tattoo to stand out..."*. Low and behold, a few months later, here we are!
+Oh, right! Well, as I was playing around with Catalyst in early January, sadly, it seemed to be missing quite a few components! Likewise, some parts of TailwindUI lack dark theme support, consistency between pages, or even the modularity that Catalyst has spoiled me with. I decided why not build it myself, and so I did! I joked with my friends at the time, *"Man, if only they were hiring, I would love to help them just get this done. Maybe I should get a Tailwind tattoo to stand out..."*. Low and behold, a few months later, here we are!
+
+## Any notable projects you are proud of?
+
+Every day I look for opportunities to make things better without asking permission. Because of this, there are more than a few projects I'm proud of, but here are a few that I think you might enjoy:
+
+1. **TCS Tracker Ultra** - My first project using Tailwind. Back when I was teaching at theCoderSchool, we had a tool for tracking student progress called TCS Tracker. Simply enough, it was a dashboard where instructors could write progress reports for students after each session. It was slow, buggy, and ugly. The manager didn't want to bother with a reimplementation, so I couldn't resist doing it myself.
+
+Here is the original for reference (names have been changed for privacy):
+
+<Image src={tcstrackeroriginal} alt="tcstrackeroriginal" />
+
+And here is the new and improved TCS Tracker Ultra:
+
+<Image src={tcstrackerultra} alt="tcstrackerultra" />
+
+What's different? For starters, I added a dark mode, because why not? I also added a search bar, a filter for instructors, and a way to view the progress of multiple students at once. I set it up as a drop in replacement where any of my coworkers could log in securely with their existing credentials, and immetiately see their students. It also does some clever prompting with ChatGPT's API to autofill progress reports at the end of each session. **This alone cut down admin work time by 90% for myself and my team.**
+
+<Image src={htpartpicker} alt="htpartpicker" />
+
+2. **Home Theater Part Picker** - A huge hobby of mine is DIY home theater. Just like any Reddit enthusiast rabbit hole you can find, there is an uneblievable amount of depth and knowledge needed to get started. I remember building my first computer when I was 12, and how easy it was because of [pcpartpicker](https://pcpartpicker.com/).
+
+    It doesn't make sense why Home Theater enthusiasts should gatekeep the everyday person from the field, so I decided to build a tool that would help people get in the right direction. Then I thought, while I'm at it, let's have some fun and play with "bleeding edge" tech. So far, HTPartPicker has been my excuse to use Catalyst (beta), Vercel AI SDK 3.0, edge compute, and all of the other cool toys going around.
+
+<Image src={virtualstaging} alt="virtualstaging" />
+
+3. **VirtualStaging.art** - Outside of solving problems, or fun hobby projects, I've worked with many clients as well of course. My software agency, Firewave (aka me but with a cool LLC to be more offical!), led the development of an innovative, AI-powered real estate staging platform that allows realtors and
+professionals to virtually stage unfurnished rooms in seconds, providing a cost-effective solution for their clients.
+
+    Outside of teaching over a hundred individual students, I've spearheaded the development of high-profile, enterprise-grade web applications by directly liaising with clients,
+understanding their needs, and translating technical requirements into well-scoped deliverables. After the project was finished, over the succeeding months, I continued to polish, refine, and test at no extra cost to the client. It's not just about going the extra mile, it's about knowing you are doing [great work](https://paulgraham.com/greatwork.html).
+
 
 ## What do you think you could bring to the team?
 
