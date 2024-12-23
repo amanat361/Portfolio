@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2024-03-15',
+  title: 'Golden Curry Pizza: Spicing up online presence for an Indian-inspired pizzeria',
+  description:
+    'We created a mouthwatering website for Golden Curry Pizza, seamlessly integrating online ordering services and showcasing their unique menu, resulting in increased foot traffic to their Seattle restaurant.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="Golden Curry Pizza Website" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/golden-curry-pizza](https://www.firewave.dev/work/golden-curry-pizza).

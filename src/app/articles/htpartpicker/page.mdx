@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2024-02-10',
+  title: 'Introducing HTPartPicker: Democratizing Home Theater Design',
+  description:
+    'HTPartPicker simplifies the process of building a home theater system, making the hobby accessible to enthusiasts of all experience levels and budgets.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="HTPartPicker Platform" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/htpartpicker](https://www.firewave.dev/work/htpartpicker).

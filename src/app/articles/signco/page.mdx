@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2024-10-05',
+  title: 'SignCo USA: Streamlined E-commerce for Custom Signage',
+  description:
+    'We developed a high-performance, SEO-friendly website for SignCo USA, creating an intuitive ordering experience for custom signage products.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="SignCo USA Website" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/signco](https://www.firewave.dev/work/signco).

@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2023-11-25',
+  title: 'Apollo Exterior Care: Launching a power washing business with a stellar online presence',
+  description:
+    'We helped Apollo Exterior Care establish their digital footprint with a clean, professional landing page that converts visitors into customers.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="Apollo Exterior Care Website" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/apollo-exterior-care](https://www.firewave.dev/work/apollo-exterior-care).

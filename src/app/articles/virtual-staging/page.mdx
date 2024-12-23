@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2023-11-12', 
+  title: 'AI Virtual Staging: Revolutionizing real estate with AI-powered virtual staging',
+  description:
+    'We developed a cutting-edge platform for AI Virtual Staging, enabling real estate professionals to transform empty spaces into beautifully staged rooms in seconds using advanced AI technology.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="AI Virtual Staging Platform" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/virtual-staging](https://www.firewave.dev/work/virtual-staging).

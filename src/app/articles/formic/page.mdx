@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2024-05-20',
+  title: 'Formic: Revolutionizing Robotics Configuration with AI-Driven Web Platform',
+  description:
+    'We developed a sophisticated web application for Formic, leveraging AI to streamline robot configuration for manufacturing and palletizing, serving as a powerful demo for investor pitches.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="Formic Platform" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/formic](https://www.firewave.dev/work/formic).

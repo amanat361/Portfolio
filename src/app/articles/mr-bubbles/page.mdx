@@ -1,0 +1,22 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import imageHero from './hero.png'
+
+export const article = {
+  author: 'Firewave',
+  date: '2024-10-15',
+  title: 'Mr. Bubbles Mobile Detailing: Polishing an auto detailing business\'s online presence',
+  description:
+    'We crafted a sleek, high-performance website for Mr. Bubbles, elevating their auto detailing services in the digital space and driving customer engagement.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageHero} alt="Mr. Bubbles Mobile Detailing Website" />
+
+This case study has been moved to our main portfolio site. You can view the full case study at [firewave.dev/work/mr-bubbles](https://www.firewave.dev/work/mr-bubbles).
