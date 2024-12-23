@@ -8,7 +8,6 @@ import { Container } from '@/components/Container'
 import Piano from '@/components/Piano'
 import {
   GitHubIcon,
-  InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/SocialIcons'
@@ -16,6 +15,8 @@ import logoFirewave from '@/images/logos/firewave.png'
 import logoTheCoderSchool from '@/images/logos/theCoderSchool.png'
 import logoCometLabs from '@/images/logos/cometLabs.webp'
 import logoPromptlink from '@/images/logos/promptlink.webp'
+import logoClarum from '@/images/logos/clarum_ai_logo.jpg'
+import logoFormic from '@/images/logos/formic.jpg'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -160,7 +161,7 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md dark:ring-0">
-        <Image src={role.logo} alt="" className="h-9 w-9" unoptimized />
+        <Image src={role.logo} alt="" className="h-9 w-9 rounded-full" unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -192,6 +193,20 @@ function Role({ role }: { role: Role }) {
 
 function Resume() {
   let resume: Array<Role> = [
+    {
+      company: 'Clarum',
+      title: "Founding Frontend Engineer",
+      logo: logoClarum,
+      start: 'Sep 2024',
+      end: 'Oct   2024'
+    },
+    {
+      company: 'Formic',
+      title: "Full Stack Engineer",
+      logo: logoFormic,
+      start: 'Mar 2024',
+      end: 'Sep 2024'
+    },
     {
       company: 'Firewave',
       title: 'Founder',
