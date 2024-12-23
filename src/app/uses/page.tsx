@@ -47,22 +47,20 @@ export default function Uses() {
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
-          <Tool title="Custom Built PC">
-            Blood, sweat, and tears went into building this thing. It started
+          <Tool title="Homelab PC">
+            It started
             around{' '}
             {new Date().getFullYear() -
               new Date('2018-09-01T00:00:00.000Z').getFullYear()}{' '}
             years ago when I built the cheapest PC I could to play games on.
-            Over the years I’ve upgraded it piece by piece until it’s become the
-            beast it is today. CPU is an AMD Ryzen 9
-            5950X and the GPU is an NVIDIA GeForce RTX 3080. I use an ultrawide
-            monitor to see more errors, I mean code, at once.
+            Over the years I’ve upgraded it piece by piece until it’s become what it is today. CPU is an R9
+            5900X and the GPU is an RTX 3080. Using Cloudflare tunnels and WSL, it doubles as a linux server to SSH into and run my homelab. It runs some projects and microservices via Coolify, and lets me compile and run code from my laptop anywhere in the world.
           </Tool>
-          <Tool title="Surface Book 2">
-            This little feller overtime has turned into my daily driver. In fact, my PC is mostly just a gaming machine now and I couldn't tell you the last time I booted up an old favorite. The Surface lets me draft ideas quickly which is vital for designing web apps and API architectures. It's also a great way to get away from my desk and work from a local coffee shop. It's a niche device and I happen to fit that niche perfectly.
+          <Tool title="Zenbook Duo">
+              Unfortunately about 99% of the code I write is not from home. This laptop lets me have a dual screen setup at the local cafe which is great. Also running WSL, I ditched the Mac world long ago and have the best of both worlds.
           </Tool>
-          <Tool title="Custom Keyboard">
-            If you are not yet a mechanical keyboard snob, I highly recommend not going down this rabbit hole. It’s a deep one. I’ve built a few keyboards over the years but my current daily driver is a 60% keyboard with lubed Sunflower tactile switches and a brass plate. GMK keycaps too of course. They say the better the keyboard sounds the better the code you write. I’m not sure if that’s true but I do know that I love the sound of this thing.
+          <Tool title="60% Keyboard">
+            If you are not yet a mechanical keyboard snob, I highly recommend not going down this rabbit hole. It’s a deep one. I’ve built a few keyboards over the years but my current daily driver is a 60% keyboard with lubed Sunflower tactile switches and a brass plate. GMK keycaps too of course.
           </Tool>
           <Tool title="Stack of Schiit">
             Modius, Magnius, Lokius. The Schiit stack. I’m not an audiophile but I do like to listen to music while I work and this stack is a great way to do that. I’m using a pair of Sundaras with it. As for albums, Mint Jams by Casiopea is my go to for quality. For personal taste though, MUSE wins every time. Anything is better than the voices in my head.
@@ -75,11 +73,8 @@ export default function Uses() {
           <Tool title="Visual Studio Code">
             Are you a Vim user reading this that think's you're better than me? Well, you're probably right. But I'm not going to let that stop me. Vim keybinds work just fine in VS Code. Plus, I can have an extension for just about everything I need! For example, hiding the sacreligiously long lines of tailwind classes.
           </Tool>
-          <Tool title="Git">
-            Really need to read this one? I mean, it's Git. You know what it is.
-          </Tool>
-          <Tool title="Unholy amounts of caffiene">
-            I'm not sure if this counts as a development tool but it's definitely a requirement. I'm a big fan of the Starbucks Nitro Cold Brew. It's like a beer but without the hangover. I also like to drink a lot of water. I'm not sure if it helps but it can't hurt.
+          <Tool title="Windows Subsystem for Linux">
+            It's actually unbelievable people still prefer MacOS for development because it is "Unix" based. I'm able to run every program I want on Windows, but have a native Ubuntu terminal for everything else. SSH into the homelab and run whatever you want. Nothing beats that.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Design">
@@ -90,9 +85,6 @@ export default function Uses() {
         <ToolsSection title="Productivity">
           <Tool title="Obsidian">
             Markdown based note taking app that I use for everything. Either this or I just hope that I remember it. I’m not sure which is better. I mainly chose Obsidian because other programmers use it and I want to be cool like them. Markdown also happens to be my preference for writing everything so it works out.
-          </Tool>
-          <Tool title="ClickUp">
-            If I had a nickel for every time I shilled for ClickUp I'd have exactly zero nickels because they don't pay me. I just really like the product. It's a great way to keep track of all of the things I need to do and it's flexible enough to work with my workflow.
           </Tool>
           <Tool title="iCal">
             Good old fashioned calendar app. If something is on my calendar it’s going to get done. I don’t know why but it’s just how my brain works. I use it for everything from meetings to reminders to when I need to take out the trash.
