@@ -1,0 +1,34 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-03-04',
+  title: 'The Business Case for AI Safety: It\'s Not What You Think',
+  description:
+    'Why AI safety measures are less about moral positioning and more about practical business considerations.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+# The Business Case for AI Safety: It's Not What You Think
+
+Let me tell you something about AI safety that gets lost in all the noise online. People **miss the point completely** when they talk about AI safety as some kind of "woke" measure or complain about LLMs being censored. What they fail to understand is that AI safety is actually **super reasonable from a business perspective**.
+
+Think about it. If large companies like Target want to use an API for their customer service chatbot, they absolutely *cannot* have it leaking sensitive data or giving away confidential company information. These big corporations have reputations to protect and shareholders to answer to. They need systems they can trust.
+
+The research that prevents an AI from using slurs or saying offensive things? **That exact same technology** helps prevent these business critical issues as well. It's not about some moral high ground that AI companies are trying to claim. It's a *calculated business move* to create products that enterprise customers can actually use without getting sued or damaging their brand.
+
+The main difference between classical compute systems and LLMs is **predictability**. Traditional software does exactly what you tell it to do, every single time. You input X, you get Y. Always. But LLMs introduce this element of unpredictability. Sometimes you input X and get Y, other times you get Z.
+
+This unpredictability creates *massive business risk*. When a company implements an AI system, they need to know it will behave consistently and not suddenly start sharing trade secrets or customer information. The entire field of AI safety research is working to solve this fundamental problem.
+
+So when you see people complaining online about AI companies implementing safety measures, remember that these measures exist primarily because **they make good business sense**. Major enterprises simply will not adopt technologies they cannot trust or control.
+
+Of course there are legitimate ethical concerns about AI development, but the safety measures we see implemented today aren't just about some abstract moral philosophy. They're **practical solutions to real business problems** that need to be addressed if AI is going to be commercially viable in the long run.
+
+The next time someone tries to tell you that AI safety is unnecessary censorship, ask them if they'd want to stake *their company's reputation* on an unpredictable system that might say or do anything at any time. The business case for AI safety is obvious when you look at it that way.
