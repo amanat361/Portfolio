@@ -1,0 +1,42 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-03-04',
+  title: 'Why MCPs Matter: Building APIs for AI Models, Not Developers',
+  description:
+    'Understanding the difference between Model Context Protocol and traditional function calling, and why it represents a fundamental shift in how we build AI tools.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Let me clear something up about Model Context Protocol (MCP) that seems to confuse a lot of folks. The concept isn't that complicated, but the execution is what makes all the difference.
+
+MCPs are **fundamentally different** from traditional function calling in LLMs. Yes, they're related, but the key distinction is WHERE you're writing your code. This changes everything.
+
+With standard function calling, you're writing code on the LLM side of things. The model generates some JSON, calls an external API or whatever, and then continues with its response. The entire process runs within the LLM's execution environment.
+
+With MCP, you're actually building the API itself. You're creating the service being called, not working within the service running the LLM. The MCP server handles all that heavy lifting, which you don't need to worry about.
+
+Think of it this way: API stands for Application Programming Interface, which companies like YouTube make for developers to interact with their systems. An MCP is something YouTube *could* make, but instead of targeting developers, it's designed for any AI model that supports the protocol.
+
+**In short, you're building APIs for models to use, not for developers.**
+
+This is different from tool calls because with MCP, your code becomes part of the service being called. It's not just an extension of the model's capabilities; it's a separate entity the model can interact with.
+
+Existing AI platforms like Claude Desktop already have MCP servers built in. You don't need to build that infrastructure. What you can do is build MCP clients, which is effectively like building an API. You can create these for your own tools or extend existing ones.
+
+Let's make this concrete with an example. Say you run DoorDash. You might build an MCP alongside your regular API. Then *any* model can interface with it directly, without every developer having to write custom tool/function calls over and over just to use your DoorDash API.
+
+The **key difference** here is that the MCP lives on the DoorDash side of things, not on Claude's side. Claude simply connects to it, learns what tools it has access to, and proceeds from there.
+
+It's similar to how REST is a standard for APIs. This convention makes it easy for developers to work with APIs from Google, Amazon, or wherever, because they all follow the same overall logic. Endpoint + HTTP method, easy.
+
+MCPs represent that same kind of standardization but for AI model interactions. The beauty is in the simplicity and universality. Once you have a protocol in place, any compliant model can use it without custom integration work.
+
+So next time someone asks why MCPs matter when we already have function calling, explain that it's about *where* the code lives and who it's designed for. Function calls are developer tools to extend models; MCPs are model tools to access developer services.
