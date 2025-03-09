@@ -1,5 +1,7 @@
-// components/Note.jsx
-export function Note({ children }) {
+// components/Note.tsx
+import React from 'react';
+
+export function Note({ children }: { children: React.ReactNode }) {
   return (
     <div className="my-8 rounded-lg bg-blue-50 p-6 dark:bg-blue-900/20">
       <div className="flex">

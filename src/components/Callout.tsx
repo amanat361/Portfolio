@@ -1,5 +1,7 @@
-// components/Callout.jsx
-export function Callout({ title, children }) {
+// components/Callout.tsx
+import React from 'react';
+
+export function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
     <div className="my-8 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
       {title && (
