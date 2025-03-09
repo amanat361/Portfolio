@@ -19,13 +19,13 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 So here's the thing about client work that nobody warns you about: the most frustrating part isn't the actual work—it's getting the materials you need to even start the work.
 
-I can't tell you how many hours of my life have disappeared into the void of "Hey, just following up on that logo file" emails. Or how many projects have stalled because I'm waiting on a signed contract that's sitting forgotten in someone's inbox.
+I can't tell you how many hours of my life have disappeared into the void of *"Hey, just following up on that logo file"* emails. Or how many projects have stalled because I'm waiting on a signed contract that's sitting forgotten in someone's inbox.
 
-Last month, I hit my breaking point. I was juggling four client projects, and literally half my workday was spent writing variations of "Just checking if you got my email about..." messages. Not billable. Not productive. Just... chasing.
+Last month, I hit my breaking point. I was juggling four client projects, and literally half my workday was spent writing variations of *"Just checking if you got my email about..."* messages. Not billable. Not productive. Just... chasing.
 
 That night, I started sketching out a solution. What if there was a tool that made requesting files as simple as typing what you need, generating a link, and letting technology handle the rest?
 
-Two weeks of late-night coding sessions later, **PleaseSendMeThis.com** was born.
+Two late-night coding sessions later, **PleaseSendMeThis.com** was born.
 
 <Note>
   This article documents my thought process, research, and development plan for this project. I want this to serve as both an introduction and a reference for anyone interested in the concept or implementation.
@@ -51,9 +51,8 @@ Let me walk through the key components that make this system special.
 
 The magical part is how you create requests. No form builder. No field configuration. Just type what you need in plain English:
 
-```
-"Please send me your updated logo in SVG format, your brand color hex codes, and a brief description of what you want highlighted on the homepage."
-```
+
+>"Please send me your updated logo in SVG format, your brand color hex codes, and a brief description of what you want highlighted on the homepage."
 
 The AI then parses this into an appropriate form with a file upload field for the SVG logo, a text input field for hex codes, and a text area for the homepage description.
 
