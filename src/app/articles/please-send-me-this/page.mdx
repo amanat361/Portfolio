@@ -1,0 +1,82 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-03-09',
+  title: 'Introducing PleaseSendMeThis.com',
+  description: 'Solving the frustrating problem of chasing down files from clients—one simple link at a time.',
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+# Introducing PleaseSendMeThis.com
+
+If you're like me, you've probably had dozens of moments where you're stuck waiting on someone—maybe a client, your Tinder date, or even your kid—to send you **that one damn thing** you're still missing. It could be a signed contract, vacation photos, or just a simple answer about their availability.
+
+Emails and existing project management tools often make this unnecessarily complicated: endless threads, manual reminders, lost attachments. PM tools are fantastic internally but cumbersome when dealing with external contacts.
+
+That's why I'm building **PleaseSendMeThis.com**.
+
+---
+
+## Core Concept and Features
+
+The idea is beautifully simple:
+
+- **Instant Request Generation:** You enter a natural-language request (like, "Please send me the signed contract and invoice"), and instantly receive a shareable link.
+- **Unique Shareable Links:** Each request generates its own secure URL directing recipients to a straightforward upload form.
+- **Minimal Upload Interface:** Recipients click the link and see a clean, no-fuss interface to upload their files.
+- **Automated Notifications:** You get notified the second files or responses arrive.
+- **No Friction:** No logins, sign-ups, or learning curves—just simplicity.
+
+---
+
+## Real-world Use Cases
+
+The beauty of this concept lies in its versatility:
+
+- **Freelancers and Agencies:** Quickly collect logos, contracts, invoices, or deliverables without constant follow-up.
+- **Busy Parents:** Easily request homework, signed permission slips, or even funny photos from your kids.
+- **Dating and Scheduling:** Simplify scheduling a date without awkward back-and-forth messages (think of it as a minimal Calendly alternative).
+- **Project Managers:** Efficiently gather missing project details or deliverables from external contributors.
+
+---
+
+## Technical Approach
+
+Currently, I'm working with a minimal frontend prototype. The next milestone involves connecting to actual file uploads and storage, likely leveraging Supabase for simplicity and scalability.
+
+### Future Technical Features:
+
+- **Automatic Reminders:** Set and forget—clients get polite automated reminders.
+- **AI-Generated Forms:** Convert natural language requests instantly into intuitive forms.
+- **Calendar Integration:** Effortless coordination built directly into the workflow.
+- **Robust Notification System:** Real-time updates, making life easier.
+
+---
+
+## Branding and Market Positioning
+
+**PleaseSendMeThis.com** is intentionally casual, friendly, and human. Key messages:
+
+- *"Get the one damn thing you need—without the hassle."*
+- *"Stop chasing clients. Just send a link."*
+- *"Simple, streamlined, frictionless file requests."*
+
+The tone is playful yet professional, clearly conveying relief from frustration without unnecessary corporate stiffness.
+
+---
+
+## Monetization (Future Considerations)
+
+While currently focusing on building and validating the core product, potential monetization strategies include:
+
+- **Freemium Model:** Basic features free, premium tiers offering unlimited usage, custom branding, and integrations.
+- **Subscription Plans:** Monthly or annual options for teams and power users.
+- **Usage-Based Pricing:** For heavy users or enterprise-level scalability.
+
+---
+
+## Collaboration and Next Steps
+
+If this resonates with you—whether you're a developer, designer, or someone familiar with the frustration—I'd love to collaborate or simply hear your thoughts. Let's make chasing after **"that one damn thing"** a thing of the past.
