@@ -43,21 +43,3 @@ Replace `"your_password"` with your actual Google account password and `"Profile
 4. **Gives you clear feedback** on what's happening
 
 Now instead of the 5-step manual process, I just type `gauth` and it's done in seconds.
-
-## Why This Works Better
-
-The key insight is using `gcloud auth application-default login` instead of regular `gcloud auth login`. This creates **application default credentials** that last longer and work better with WSL's networking limitations.
-
-The browser export ensures gcloud can find Chrome, and specifying a profile means it opens in the right Google account context immediately.
-
-## Requirements
-
-You'll need `xclip` installed for clipboard functionality:
-
-```bash
-sudo apt install xclip
-```
-
-That's it. No complex setup, no weird workarounds, just a simple alias that **solves the problem** and gets you back to coding.
-
-*Sometimes the simplest solutions are the best ones.*
