@@ -33,11 +33,11 @@ export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
 alias gauth='echo "your_password" | xclip -selection clipboard && echo "✅ Password copied to clipboard" && "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" --profile-directory="Profile 3" > /dev/null 2>&1 && gcloud auth application-default login > /dev/null 2>&1 && echo "🎉 Authentication complete!"'
 ```
 
-Replace `"your_password"` with your actual WSL password and `"Profile 3"` with your Chrome profile if different.
+Replace `"your_password"` with your actual Google account password and `"Profile 3"` with your Chrome profile if different.
 
 ## What This Does
 
-1. **Copies your password** to clipboard (for any sudo prompts)
+1. **Copies your Google password** to clipboard (for browser authentication)
 2. **Opens Chrome** with the correct profile automatically  
 3. **Runs gcloud auth** in the background
 4. **Gives you clear feedback** on what's happening
