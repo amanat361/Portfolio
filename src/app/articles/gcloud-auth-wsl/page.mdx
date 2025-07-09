@@ -1,0 +1,63 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-01-09',
+  title: 'Stop Manually Authenticating Google Cloud CLI Every Day in WSL',
+  description:
+    'A simple alias that solves the daily gcloud authentication headache in WSL environments.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+If you develop in WSL and use Google Cloud CLI, you know the pain. **Every single day** you have to run `gcloud auth login`, wait for it to fail to open a browser, copy a URL, paste it into Windows Chrome, authenticate, and then hope it sticks until tomorrow.
+
+It doesn't.
+
+The problem is that WSL can't directly open browsers, Google's security policies force frequent re-authentication in WSL environments, and the whole process is just *annoying* when you're trying to get work done.
+
+## The Simple Solution
+
+Here's what I added to my `.zshrc` that **completely eliminates** this daily friction:
+
+```bash
+# Set browser for gcloud
+export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+
+# One-command authentication
+alias gauth='echo "your_password" | xclip -selection clipboard && echo "✅ Password copied to clipboard" && "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" --profile-directory="Profile 3" > /dev/null 2>&1 && gcloud auth application-default login > /dev/null 2>&1 && echo "🎉 Authentication complete!"'
+```
+
+Replace `"your_password"` with your actual WSL password and `"Profile 3"` with your Chrome profile if different.
+
+## What This Does
+
+1. **Copies your password** to clipboard (for any sudo prompts)
+2. **Opens Chrome** with the correct profile automatically  
+3. **Runs gcloud auth** in the background
+4. **Gives you clear feedback** on what's happening
+
+Now instead of the 5-step manual process, I just type `gauth` and it's done in seconds.
+
+## Why This Works Better
+
+The key insight is using `gcloud auth application-default login` instead of regular `gcloud auth login`. This creates **application default credentials** that last longer and work better with WSL's networking limitations.
+
+The browser export ensures gcloud can find Chrome, and specifying a profile means it opens in the right Google account context immediately.
+
+## Requirements
+
+You'll need `xclip` installed for clipboard functionality:
+
+```bash
+sudo apt install xclip
+```
+
+That's it. No complex setup, no weird workarounds, just a simple alias that **solves the problem** and gets you back to coding.
+
+*Sometimes the simplest solutions are the best ones.*
