@@ -1,0 +1,48 @@
+import { ArticleLayout } from ‘@/components/ArticleLayout’
+
+export const article = {
+author: ‘Sam Amanat’,
+date: ‘2025-08-15’,
+title: ‘The mr-2 Anti-Pattern: Another AI Tell’,
+description:
+‘How redundant margin classes in imported components reveal AI-generated code.’,
+}
+
+export const metadata = {
+title: article.title,
+description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {…props} />
+
+If you’ve been reviewing AI-generated React code lately, you’ve probably noticed something off about component usage. Like the em-dash tell in writing, there’s a spacing pattern that immediately screams “AI-generated.”
+
+## The Pattern
+
+Here’s what AI typically generates when using a component from `@/components/ui`:
+
+```jsx
+// AI-generated code
+import { Button } from '@/components/ui/button'
+
+<Button>
+  <span className="mr-2">Save File</span>
+  <Star className="w-4 h-4" />
+</Button>
+```
+
+Versus what a human would write:
+
+```jsx
+// Human-written code
+import { Button } from '@/components/ui/button'
+
+<Button>
+  <span>Save File</span>
+  <Star className="w-4 h-4" />
+</Button>
+```
+
+The AI can’t see that the Button component already handles spacing internally, so it defensively adds margins everywhere.
+
+These small details matter. They’re the difference between stop versus something that feels intentional.
