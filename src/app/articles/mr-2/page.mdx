@@ -13,7 +13,7 @@ title: article.title,
 description: article.description,
 }
 
-export default (props) => <ArticleLayout article={article} {…props} />
+export default (props) => <ArticleLayout article={article} {...props} />
 
 If you’ve been reviewing AI-generated React code lately, you’ve probably noticed something off about component usage. Like the em-dash tell in writing, there’s a spacing pattern that immediately screams “AI-generated.”
 
