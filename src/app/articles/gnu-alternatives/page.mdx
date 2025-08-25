@@ -1,0 +1,27 @@
+import { ArticleLayout } from "@/components/ArticleLayout"
+
+export const article = { author: "Sam Amanat", date: "2025-08-24", title: "Better GNU Tools", description: "Modern replacements for ancient command line tools that actually make sense.", }
+
+export const metadata = { title: article.title, description: article.description, }
+
+export default (props) => <ArticleLayout article={article} {…props} />
+
+Here are some good alternatives to common GNU tools that are faster and have better defaults.
+
+**du → dust**  
+`du` shows disk usage but the output is hard to parse. `dust` gives you a visual representation with colored bars that make it easy to see what’s eating your storage at a glance.
+
+**ls → eza**  
+`ls` lists files but it’s plain and limited. `eza` is a modernized version with colors, git status integration, tree views, and human-readable file sizes built in.
+
+**tar → ouch**  
+`tar` handles archives but the syntax is notoriously clunky. `ouch` is user-friendly and supports multiple formats with simpler commands that actually make sense.
+
+**find → fd**  
+`find` locates files but the syntax is verbose and unintuitive. `fd` is faster and simpler, supports regex, has color output, and better defaults without sacrificing power.
+
+**grep → ripgrep**  
+`grep` searches text but it’s slower on large codebases. `ripgrep` is blazing fast, optimized for code, respects .gitignore files, and supports richer options without complex flags.
+
+**cd → zoxide**  
+`cd` is basic directory navigation with no memory. `zoxide` is a smart directory jumper that remembers frequently used paths and lets you jump with fuzzy matching, reducing keystrokes.
