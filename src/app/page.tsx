@@ -6,11 +6,8 @@ import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import Piano from '@/components/Piano'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  TwitterIcon,
-} from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/SocialIcons'
+import logoNovl from '@/images/logos/novl.png'
 import logoFirewave from '@/images/logos/firewave.png'
 import logoTheCoderSchool from '@/images/logos/theCoderSchool.png'
 import logoCometLabs from '@/images/logos/cometLabs.webp'
@@ -128,7 +125,7 @@ function Newsletter() {
       </p>
       <div className="mt-6 flex">
         <input
-          name='email'
+          name="email"
           type="email"
           placeholder="Email address"
           aria-label="Email address"
@@ -163,7 +160,12 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md dark:ring-0">
-        <Image src={role.logo} alt="" className="h-9 w-9 rounded-full" unoptimized />
+        <Image
+          src={role.logo}
+          alt=""
+          className="h-9 w-9 rounded-full"
+          unoptimized
+        />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -196,18 +198,25 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
+      company: 'Novl',
+      title: 'Chief Technology Officer',
+      logo: logoNovl,
+      start: 'Mar 2025',
+      end: 'Sep 2025',
+    },
+    {
       company: 'Clarum',
-      title: "Founding Frontend Engineer",
+      title: 'Founding Frontend Engineer',
       logo: logoClarum,
       start: 'Sep 2024',
-      end: 'Oct   2024'
+      end: 'Oct   2024',
     },
     {
       company: 'Formic',
-      title: "Full Stack Engineer",
+      title: 'Full Stack Engineer',
       logo: logoFormic,
       start: 'Mar 2024',
-      end: 'Sep 2024'
+      end: 'Sep 2024',
     },
     {
       company: 'Firewave',
@@ -262,7 +271,7 @@ function Resume() {
       </ol>
       <Button
         href="https://drive.google.com/file/d/1zOdYBn-na3qvpF1o7gS9gmBLWk8epZ20/view?usp=sharing"
-        target='_blank'
+        target="_blank"
         variant="secondary"
         className="group mt-6 w-full"
       >
