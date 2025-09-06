@@ -12,11 +12,77 @@ import logoMrBubbles from '@/images/logos/mrBubbles.webp'
 import logoHTPartPicker from '@/images/logos/htpartpicker.webp'
 import logoRedditBot from '@/images/logos/reddit.png'
 import logoUnity from '@/images/logos/unity.jpg'
+import logoNovl from '@/images/logos/novl.png'
+import logoClarum from '@/images/logos/clarum_ai_logo.jpg'
+import logoFormic from '@/images/logos/formic.jpg'
+import logoVercel from '@/images/logos/vercel.png'
+import logoSamantics from '@/images/logos/samantics.png'
 
 const projects = [
   {
+    name: 'Novl',
+    description:
+      'AI-powered resourcing platform for architecture and engineering firms. As CTO, I built the platform from the ground up, handling everything from technical architecture to customer discovery. Helped firms optimize their project staffing through intelligent matching algorithms.',
+    link: {
+      href: 'https://www.trynovl.com/',
+      label: 'trynovl.com',
+    },
+    logo: logoNovl,
+  },
+  {
+    name: 'Clarum',
+    description:
+      'YC24 startup focused on AI-powered business intelligence. As a founding frontend engineer, I helped build the core product experience from zero to one. Worked closely with the founding team to shape product direction and user experience.',
+    link: {
+      href: 'https://clarum.ai/',
+      label: 'clarum.ai',
+    },
+    logo: logoClarum,
+  },
+  {
+    name: 'Formic Configurator',
+    description:
+      'AI robotics platform that helps manufacturers configure and deploy robotic automation solutions. Built intuitive interfaces for complex robotic systems, making industrial automation accessible to non-technical users.',
+    link: {
+      href: 'https://configurator.formic.co/',
+      label: 'configurator.formic.co',
+    },
+    logo: logoFormic,
+  },
+  {
+    name: 'Samantics',
+    description:
+      'A similarity-based daily word guessing game that uses vector embeddings to determine how close your guesses are to the target word. Built with Bun and self-hosted for optimal performance. Challenge your vocabulary and semantic understanding.',
+    link: {
+      href: 'https://play.qwertea.dev/',
+      label: 'play.qwertea.dev',
+    },
+    logo: logoSamantics,
+  },
+  {
+    name: 'VS Code Grep Extension',
+    description:
+      'Instantly search through 500,000+ GitHub repositories using grep.app directly from your VS Code editor. Find examples, check if code exists, or discover similar implementations with just a few clicks. Published on the VS Code Marketplace.',
+    link: {
+      href: 'https://marketplace.visualstudio.com/items?itemName=SaminAmanat.grep-search',
+      label: 'VS Code Marketplace',
+    },
+    logo: logoVercel,
+  },
+  {
+    name: 'Better Contact Sales',
+    description:
+      'A takehome assignment from Vercel to rebuild their Contact Sales pipeline. Features AI research agents and email integration to streamline the sales process. Demonstrates modern sales automation and AI-powered customer interaction.',
+    link: {
+      href: 'https://www.bettercontactsales.com/',
+      label: 'bettercontactsales.com',
+    },
+    logo: logoVercel,
+  },
+  {
     name: 'HT Part Picker',
-    description: "The world’s only one stop shop for all your Home Theater needs. This website is a passion project currently in development. We are working hard to bring you the best experience possible.",
+    description:
+      "The world's only one stop shop for all your Home Theater needs. This website is a passion project currently in development. We are working hard to bring you the best experience possible.",
     link: {
       href: 'https://www.htpartpicker.com/',
       label: 'htpartpicker.com',
@@ -84,9 +150,9 @@ const projects = [
     logo: logoAssembly,
   },
   {
-    name: "Hex Immunitea",
+    name: 'Hex Immunitea',
     description:
-      "A strategic attack and board game similar to Chess that uses a hexagonal board. Built in Unity and C#, it is a fun and challenging game that is easy to learn and hard to master.",
+      'A strategic attack and board game similar to Chess that uses a hexagonal board. Built in Unity and C#, it is a fun and challenging game that is easy to learn and hard to master.',
     link: {
       href: 'https://amanat361.github.io/game.html',
       label: 'Play Hex Immunitea',
@@ -94,8 +160,9 @@ const projects = [
     logo: logoUnity,
   },
   {
-    name: "Game Recommender",
-    description: "A reddit bot written in Python for recommending Steam Games. This is my first GitHub repo ever and shows my development journey being almost a decade long!",
+    name: 'Game Recommender',
+    description:
+      'A reddit bot written in Python for recommending Steam Games. This is my first GitHub repo ever and shows my development journey being almost a decade long!',
     link: {
       href: 'https://github.com/amanat361/Reddit-Bot',
       label: 'Reddit Bot GitHub',
@@ -136,7 +203,7 @@ export default function Projects() {
               <Image
                 src={project.logo}
                 alt=""
-                className="h-8 w-8"
+                className="h-8 w-8 rounded-full"
                 unoptimized
               />
             </div>
