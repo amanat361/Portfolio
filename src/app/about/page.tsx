@@ -70,12 +70,12 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            I like writing code and sometimes something cool comes out of it.
+            I'm Sam, a software engineer who loves building things that matter.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I've been coding for over a decade now but the passion for it has
-              never died down. I still laugh looking at the commits of my{' '}
+              I've been coding for over a decade now, and the passion still hits
+              the same as when I was trying to build my{' '}
               <a
                 href="https://github.com/amanat361/Reddit-Bot/commit/43817aa4160f18aff22c071af3f95f4ed20f0188"
                 target="_blank"
@@ -84,14 +84,28 @@ export default function About() {
               >
                 first
               </a>{' '}
-              GitHub repo, trying to make a Reddit bot in Python. Things
-              haven&apos;t changed much.
+              Reddit bot in Python. The code quality has definitely improved
+              since then, but that excitement of seeing something work for the
+              first time? That never gets old.
             </p>
             <p>
-              My biggest passion is to build and to learn. Every day is a new
-              rabbit hole of trying some niche framework or arguing about
-              Tailwind on Twitter. But when I'm not doing that, I'm usually
-              working on{' '}
+              Most recently, I was CTO at Novl, where I built an AI resourcing
+              platform for architecture and engineering firms. What I loved most
+              about the role was how it pushed me beyond just engineering. I got
+              to shape product decisions, talk directly with customers, and
+              figure out how to turn their problems into technical solutions.
+              Those discovery calls taught me as much about business as they did
+              about what users actually need.
+            </p>
+            <p>
+              Before Novl, I was a founding frontend engineer at a YC24 startup,
+              which was an incredible learning experience building from zero to
+              one. And before that, I worked on an AI robotics platform at
+              Formic, where I got to see how software could control real-world
+              systems.
+            </p>
+            <p>
+              These days, I'm working on{' '}
               <a
                 className="underline"
                 href="https://firewave.dev/"
@@ -100,29 +114,9 @@ export default function About() {
               >
                 Firewave
               </a>
-              , a software development agency that helps startups and small
-              businesses build their ideas.
-            </p>
-            <p>
-              Recently me and my colleague put out{' '}
-              <a
-                className="underline"
-                href="https://www.virtualstaging.art/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                VirtualStaging AI
-              </a>
-              , a tool for real estate professionals to stage a photo with
-              furniture in seconds. Now I'm set to build HT Part Picker, a tool
-              you can read my article about{' '}
-              <Link
-                className="underline"
-                href="/articles/home-theater-part-picker"
-              >
-                here
-              </Link>
-              .
+              , helping startups and small businesses build their ideas. I'm
+              always curious about new tech and love the challenge of figuring
+              out how to make things work.
             </p>
           </div>
         </div>
