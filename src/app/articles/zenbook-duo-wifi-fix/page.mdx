@@ -1,0 +1,275 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-10-20',
+  title: 'ASUS Zenbook Duo WiFi Fix for Linux',
+  description:
+    'A reliable udev-based solution to fix the spurious WiFi disable bug when detaching the keyboard on the ASUS Zenbook Duo UX8406MA running Linux.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+## The Problem
+
+On the ASUS Zenbook Duo (UX8406MA), detaching the keyboard triggers a spurious wireless disable event that turns off WiFi. This is a known Linux kernel bug. While a fix was merged into kernel 6.11+, it doesn't work reliably on all systems.
+
+**Symptoms:**
+- WiFi turns off when you detach the keyboard
+- WiFi may also turn off when you reattach the keyboard
+- You have to manually re-enable WiFi each time
+
+## The Solution
+
+This fix uses udev rules to automatically re-enable WiFi whenever the keyboard is detached or attached. It also provides optional notifications so you know when the events occur.
+
+**What it does:**
+- Automatically unblocks WiFi (rfkill) when keyboard events happen
+- Sends desktop notifications (optional, easily customizable)
+- Runs efficiently with zero overhead when idle (event-driven, no background processes)
+
+## Installation
+
+### 1. Create the system handler script
+
+This script runs as root and handles WiFi re-enabling:
+
+```bash
+sudo tee /usr/local/bin/zenbook-kbd-system.sh > /dev/null << 'EOF'
+#!/bin/bash
+# System-level handler for Zenbook Duo keyboard events
+# Handles root-level operations (rfkill, etc.)
+
+ACTION=$1
+LOGPREFIX="Zenbook-System"
+LOCK_FILE="/tmp/zenbook-kbd-system-${ACTION}.lock"
+
+# Atomic lock - prevents duplicate runs
+exec 200>"$LOCK_FILE"
+if ! flock -n -x 200; then
+    exit 0  # Another instance is already running, skip
+fi
+
+case "$ACTION" in
+    remove)
+        # Keyboard detached - keep WiFi alive
+        logger "$LOGPREFIX: Keyboard detached, maintaining WiFi"
+        sleep 0.5
+        rfkill unblock wifi
+        ;;
+    add)
+        # Keyboard attached - also unblock WiFi (spurious toggle happens on reattach too)
+        logger "$LOGPREFIX: Keyboard attached, maintaining WiFi"
+        sleep 0.5
+        rfkill unblock wifi
+        ;;
+esac
+
+# Hold the lock briefly so other instances will skip
+sleep 0.5
+EOF
+
+sudo chmod +x /usr/local/bin/zenbook-kbd-system.sh
+```
+
+### 2. Create the user handler script
+
+This script runs as your user and handles notifications and other Hyprland-specific actions:
+
+```bash
+mkdir -p ~/.local/bin
+
+cat > ~/.local/bin/zenbook-kbd-user.sh << 'EOF'
+#!/bin/bash
+# User-level handler for Zenbook Duo keyboard events
+# Handles Hyprland-specific operations (notifications, display changes, etc.)
+
+ACTION=$1
+USER_NAME="sam"
+USER_ID=$(id -u $USER_NAME)
+LOCK_FILE="/tmp/zenbook-kbd-${ACTION}.lock"
+
+# Atomic lock with timeout - prevents duplicate runs
+exec 200>"$LOCK_FILE"
+if ! flock -n -x 200; then
+    exit 0  # Another instance is already running, skip
+fi
+
+# Get Hyprland environment
+export XDG_RUNTIME_DIR="/run/user/$USER_ID"
+export HYPRLAND_INSTANCE_SIGNATURE=$(ls $XDG_RUNTIME_DIR/hypr/ 2>/dev/null | head -n1)
+
+case "$ACTION" in
+    remove)
+        # Keyboard detached
+        notify-send "Zenbook Duo" "Keyboard detached" -u low
+
+        # Add your custom Hyprland commands here:
+        # - Monitor layout changes
+        # - Display rotation
+        # - Workspace switching
+        # - etc.
+
+        logger "Zenbook-User: Keyboard detached (user handler)"
+        ;;
+    add)
+        # Keyboard attached
+        notify-send "Zenbook Duo" "Keyboard attached" -u low
+
+        logger "Zenbook-User: Keyboard attached (user handler)"
+        ;;
+esac
+
+# Hold the lock briefly so other instances will skip
+sleep 0.5
+EOF
+
+chmod +x ~/.local/bin/zenbook-kbd-user.sh
+```
+
+**Important:** Edit the `USER_NAME="sam"` line to match your actual username!
+
+### 3. Create the udev rule
+
+This rule triggers both scripts when the keyboard is attached or detached:
+
+```bash
+sudo tee /etc/udev/rules.d/99-zenbook-keyboard.rules > /dev/null << 'EOF'
+# ASUS Zenbook Duo Keyboard Event Handler
+# Vendor: 0b05 (ASUS), Product: 1b2c (Zenbook Duo Keyboard)
+
+# Keyboard removed - match interface 1.0 specifically (first interface)
+ACTION=="remove", SUBSYSTEM=="usb", KERNEL=="*:1.0", ATTRS{idVendor}=="0b05", ATTRS{idProduct}=="1b2c", \
+    RUN+="/usr/local/bin/zenbook-kbd-system.sh remove", \
+    RUN+="/usr/bin/sudo -u sam /home/sam/.local/bin/zenbook-kbd-user.sh remove"
+
+# Keyboard added - only trigger once on interface 0
+ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="00", ATTRS{idVendor}=="0b05", ATTRS{idProduct}=="1b2c", \
+    RUN+="/usr/local/bin/zenbook-kbd-system.sh add", \
+    RUN+="/usr/bin/sudo -u sam /home/sam/.local/bin/zenbook-kbd-user.sh add"
+EOF
+```
+
+**Important:** Replace `sam` in the udev rule with your actual username (appears twice in the file)!
+
+### 4. Reload udev rules
+
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+## Testing
+
+1. Detach your keyboard - you should see a notification "Keyboard detached" and WiFi stays connected
+2. Reattach your keyboard - you should see a notification "Keyboard attached" and WiFi stays connected
+
+Check the logs to verify it's working:
+
+```bash
+journalctl -n 50 --no-pager | grep -E "Zenbook-"
+```
+
+You should see entries like:
+- `Zenbook-System: Keyboard detached, maintaining WiFi`
+- `Zenbook-User: Keyboard detached (user handler)`
+
+## Customization
+
+### Disable notifications
+
+Edit `~/.local/bin/zenbook-kbd-user.sh` and comment out or remove the `notify-send` lines:
+
+```bash
+# notify-send "Zenbook Duo" "Keyboard detached" -u low
+```
+
+### Add custom actions
+
+You can add any commands in the user script. Examples:
+
+**Rotate display when detaching:**
+```bash
+remove)
+    notify-send "Zenbook Duo" "Keyboard detached" -u low
+    hyprctl keyword monitor eDP-1,transform,1  # Rotate to portrait
+    ;;
+add)
+    notify-send "Zenbook Duo" "Keyboard attached" -u low
+    hyprctl keyword monitor eDP-1,transform,0  # Back to landscape
+    ;;
+```
+
+**Switch workspace layout:**
+```bash
+remove)
+    notify-send "Zenbook Duo" "Tablet mode" -u low
+    hyprctl keyword general:layout dwindle  # Switch to tablet-friendly layout
+    ;;
+```
+
+**Launch/close apps:**
+```bash
+remove)
+    killall waybar  # Hide status bar in tablet mode
+    ;;
+add)
+    waybar &  # Show status bar with keyboard
+    ;;
+```
+
+## Troubleshooting
+
+### WiFi still gets disabled
+
+1. Check if the scripts are being triggered:
+   ```bash
+   journalctl -f | grep Zenbook
+   ```
+   Then detach/attach the keyboard and watch for log entries.
+
+2. If you don't see any logs, the udev rule might not be matching. Check your USB device IDs:
+   ```bash
+   lsusb | grep -i asus
+   ```
+   Make sure it shows `0b05:1b2c`. If different, update the udev rule.
+
+3. Make sure you replaced `sam` with your actual username in both files!
+
+### Notifications not appearing
+
+- Make sure you're running a notification daemon (mako, dunst, or swaync)
+- Check if `notify-send` works manually:
+  ```bash
+  notify-send "Test" "Hello"
+  ```
+
+### Permission errors
+
+If you see permission errors in logs, you might not be in the sudoers file. The scripts need to run as root to use `rfkill`.
+
+## How It Works
+
+1. **udev** detects when the keyboard USB device (vendor 0b05, product 1b2c) is added or removed
+2. The udev rule matches only ONE interface to avoid duplicate triggers (interface 1.0 for remove, interface 00 for add)
+3. Two scripts run:
+   - **System script** (as root): Runs `rfkill unblock wifi` to re-enable WiFi
+   - **User script** (as your user): Sends notifications and runs any custom Hyprland commands
+4. Scripts use `flock` for atomic locking to prevent race conditions if multiple events fire
+
+## Why the Kernel Fix Doesn't Work
+
+The kernel fix (merged in 6.11) should suppress the spurious wireless toggle events from the `asus-nb-wmi` driver. However, even on kernel 6.16+, the fix doesn't reliably work on all Zenbook Duo units. This udev-based solution is more reliable and works regardless of kernel version.
+
+## Credits
+
+Solution developed for ASUS Zenbook Duo UX8406MA running Arch Linux with Hyprland/Omarchy.
+
+## License
+
+Public domain. Use freely, modify as needed, share with others.
