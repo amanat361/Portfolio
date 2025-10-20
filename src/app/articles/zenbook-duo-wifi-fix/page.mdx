@@ -3,9 +3,9 @@ import { ArticleLayout } from '@/components/ArticleLayout'
 export const article = {
   author: 'Sam Amanat',
   date: '2025-10-20',
-  title: 'ASUS Zenbook Duo WiFi Fix for Linux',
+  title: 'Getting the Zenbook Duo Working on Linux',
   description:
-    'A reliable udev-based solution to fix the spurious WiFi disable bug when detaching the keyboard on the ASUS Zenbook Duo UX8406MA running Linux.',
+    'Fixing the annoying WiFi disconnect bug and setting up dual-screen mode on the ASUS Zenbook Duo UX8406MA. If you have this laptop and run Linux, this might save you some headaches.',
 }
 
 export const metadata = {
@@ -26,11 +26,15 @@ On the ASUS Zenbook Duo (UX8406MA), detaching the keyboard triggers a spurious w
 
 ## The Solution
 
-This fix uses udev rules to automatically re-enable WiFi whenever the keyboard is detached or attached. It also provides optional notifications so you know when the events occur.
+This is a complete setup for the Zenbook Duo that handles keyboard attach/detach events intelligently.
 
 **What it does:**
 - Automatically unblocks WiFi (rfkill) when keyboard events happen
-- Sends desktop notifications (optional, easily customizable)
+- Automatically enables/disables the second screen based on keyboard state
+- Properly maps touchscreen inputs to the correct displays
+- Provides desktop notifications for all events
+- Configures stacked monitor layout (top/bottom) for dual-screen mode
+- Sets up media key bindings (volume, brightness, etc.)
 - Runs efficiently with zero overhead when idle (event-driven, no background processes)
 
 ## Installation
@@ -106,20 +110,16 @@ export HYPRLAND_INSTANCE_SIGNATURE=$(ls $XDG_RUNTIME_DIR/hypr/ 2>/dev/null | hea
 
 case "$ACTION" in
     remove)
-        # Keyboard detached
-        notify-send "Zenbook Duo" "Keyboard detached" -u low
-
-        # Add your custom Hyprland commands here:
-        # - Monitor layout changes
-        # - Display rotation
-        # - Workspace switching
-        # - etc.
+        # Keyboard detached - enable second screen (dual screen mode, stacked below)
+        hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
+        notify-send "Zenbook KB Detached" "Second screen enabled" -u low
 
         logger "Zenbook-User: Keyboard detached (user handler)"
         ;;
     add)
-        # Keyboard attached
-        notify-send "Zenbook Duo" "Keyboard attached" -u low
+        # Keyboard attached - disable second screen (keyboard covers it)
+        hyprctl keyword monitor eDP-2,disable
+        notify-send "Zenbook KB Attached" "Second screen disabled" -u low
 
         logger "Zenbook-User: Keyboard attached (user handler)"
         ;;
@@ -134,7 +134,56 @@ chmod +x ~/.local/bin/zenbook-kbd-user.sh
 
 **Important:** Edit the `USER_NAME="sam"` line to match your actual username!
 
-### 3. Create the udev rule
+**Note:** The monitor configuration above assumes 2880x1800@120Hz displays. Adjust the resolution/refresh rate if yours differs.
+
+### 3. Configure Hyprland monitors
+
+Edit `~/.config/hypr/monitors.conf` to set up the dual-screen stacked layout:
+
+```bash
+# Stacked layout - second screen below first (in logical pixels accounting for 1.8 scale)
+monitor=eDP-1,2880x1800@120,0x0,1.8
+monitor=eDP-2,2880x1800@120,0x1000,1.8
+```
+
+The position `0x1000` places the second screen directly below the first. With 1.8x scaling, the logical height is 1000px (1800/1.8=1000).
+
+### 4. Map touchscreens to correct displays
+
+Edit `~/.config/hypr/input.conf` and add these device mappings at the end:
+
+```bash
+# Map touchscreens to correct displays
+device {
+  name = elan9008:00-04f3:425b
+  output = eDP-1
+}
+
+device {
+  name = elan9009:00-04f3:425a
+  output = eDP-2
+}
+```
+
+This ensures touch input on each screen registers on the correct display.
+
+### 5. Set up media key bindings (optional)
+
+Since the Fn key doesn't work with F-keys on the detached keyboard, add these bindings to `~/.config/hypr/bindings.conf`:
+
+```bash
+# Media keys (Fn key doesn't work with F-keys on Zenbook Duo, using Super instead)
+bindd = SUPER, F2, Volume down, exec, swayosd-client --output-volume lower
+bindd = SUPER, F3, Volume up, exec, swayosd-client --output-volume raise
+bindd = SUPER, F4, Mic mute, exec, swayosd-client --input-volume mute-toggle
+bindd = SUPER, F5, Brightness down, exec, brightnessctl -d intel_backlight set 5%- && swayosd-client --brightness lower
+bindd = SUPER, F6, Brightness up, exec, brightnessctl -d intel_backlight set 5%+ && swayosd-client --brightness raise
+bindd = SUPER, F9, Mute, exec, swayosd-client --output-volume mute-toggle
+```
+
+This uses `swayosd-client` for visual OSD popups (Omarchy default). If you don't use swayosd, replace with `wpctl` commands.
+
+### 6. Create the udev rule
 
 This rule triggers both scripts when the keyboard is attached or detached:
 
@@ -157,17 +206,31 @@ EOF
 
 **Important:** Replace `sam` in the udev rule with your actual username (appears twice in the file)!
 
-### 4. Reload udev rules
+### 7. Reload udev rules and Hyprland config
 
 ```bash
 sudo udevadm control --reload-rules
 sudo udevadm trigger
+hyprctl reload
 ```
 
 ## Testing
 
-1. Detach your keyboard - you should see a notification "Keyboard detached" and WiFi stays connected
-2. Reattach your keyboard - you should see a notification "Keyboard attached" and WiFi stays connected
+1. **Detach your keyboard** - you should see:
+   - Notification: "Zenbook KB Detached - Second screen enabled"
+   - WiFi stays connected
+   - Second screen appears below the first screen
+   - Touch input works correctly on both screens
+
+2. **Reattach your keyboard** - you should see:
+   - Notification: "Zenbook KB Attached - Second screen disabled"
+   - WiFi stays connected
+   - Second screen turns off (keyboard covers it)
+
+3. **Test media keys** (with keyboard attached):
+   - Super+F2/F3: Volume down/up with OSD popup
+   - Super+F5/F6: Brightness down/up with OSD popup
+   - Super+F9: Mute toggle with OSD popup
 
 Check the logs to verify it's working:
 
@@ -186,7 +249,21 @@ You should see entries like:
 Edit `~/.local/bin/zenbook-kbd-user.sh` and comment out or remove the `notify-send` lines:
 
 ```bash
-# notify-send "Zenbook Duo" "Keyboard detached" -u low
+# notify-send "Zenbook KB Detached" "Second screen enabled" -u low
+```
+
+### Disable second screen automation
+
+If you want to keep the second screen always enabled (not auto-toggle), edit `~/.local/bin/zenbook-kbd-user.sh` and comment out the `hyprctl keyword monitor` lines.
+
+### Change monitor layout
+
+To change from stacked (top/bottom) to side-by-side, edit `~/.config/hypr/monitors.conf`:
+
+```bash
+# Side-by-side layout
+monitor=eDP-1,2880x1800@120,0x0,1.8
+monitor=eDP-2,2880x1800@120,1600x0,1.8  # Position to the right (1600 = 2880/1.8)
 ```
 
 ### Add custom actions
@@ -196,32 +273,42 @@ You can add any commands in the user script. Examples:
 **Rotate display when detaching:**
 ```bash
 remove)
-    notify-send "Zenbook Duo" "Keyboard detached" -u low
+    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
     hyprctl keyword monitor eDP-1,transform,1  # Rotate to portrait
-    ;;
-add)
-    notify-send "Zenbook Duo" "Keyboard attached" -u low
-    hyprctl keyword monitor eDP-1,transform,0  # Back to landscape
+    notify-send "Zenbook KB Detached" "Second screen enabled" -u low
     ;;
 ```
 
 **Switch workspace layout:**
 ```bash
 remove)
-    notify-send "Zenbook Duo" "Tablet mode" -u low
+    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
     hyprctl keyword general:layout dwindle  # Switch to tablet-friendly layout
+    notify-send "Zenbook KB Detached" "Tablet mode" -u low
     ;;
 ```
 
 **Launch/close apps:**
 ```bash
 remove)
+    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
     killall waybar  # Hide status bar in tablet mode
+    notify-send "Zenbook KB Detached" "Second screen enabled" -u low
     ;;
 add)
+    hyprctl keyword monitor eDP-2,disable
     waybar &  # Show status bar with keyboard
+    notify-send "Zenbook KB Attached" "Second screen disabled" -u low
     ;;
 ```
+
+### Multi-monitor workspaces
+
+In Hyprland, each monitor has **independent workspaces**. With dual screens enabled:
+- Use `Super + 1-9` to switch workspaces on the current monitor (where your cursor is)
+- Use `Super + Shift + 1-9` to move windows between workspaces
+- Use `Super + Tab` / `Super + Shift + Tab` to cycle through workspaces
+- You can have workspace 1 on the top screen AND workspace 1 on the bottom screen simultaneously
 
 ## Troubleshooting
 
@@ -253,23 +340,76 @@ add)
 
 If you see permission errors in logs, you might not be in the sudoers file. The scripts need to run as root to use `rfkill`.
 
+### Touchscreen input goes to wrong screen
+
+If touches on the second screen register on the first screen (or vice versa), the device names might be different. Check your touchscreen devices:
+
+```bash
+hyprctl devices | grep -A 2 "Touch:"
+```
+
+Update the device names in `~/.config/hypr/input.conf` to match your output.
+
+### Brightness controls don't work
+
+The brightness commands target `intel_backlight` for the main screen. If your system uses a different backlight device, check available devices:
+
+```bash
+ls /sys/class/backlight/
+```
+
+Update the brightness bindings in `~/.config/hypr/bindings.conf` to use your backlight device name.
+
+### Detached keyboard trackpad doesn't work
+
+This is a Bluetooth pairing issue. The keyboard connects via Bluetooth when detached, but sometimes only the keyboard interface pairs, not the trackpad. Try:
+1. Re-pair the Bluetooth keyboard completely (remove and re-add in your Bluetooth settings)
+2. Detach and reattach the keyboard - sometimes it fixes itself on subsequent connections
+
 ## How It Works
 
 1. **udev** detects when the keyboard USB device (vendor 0b05, product 1b2c) is added or removed
 2. The udev rule matches only ONE interface to avoid duplicate triggers (interface 1.0 for remove, interface 00 for add)
-3. Two scripts run:
+3. Two scripts run in parallel:
    - **System script** (as root): Runs `rfkill unblock wifi` to re-enable WiFi
-   - **User script** (as your user): Sends notifications and runs any custom Hyprland commands
+   - **User script** (as your user):
+     - Enables/disables the second screen via `hyprctl`
+     - Sends desktop notifications
+     - Runs any custom Hyprland commands you add
 4. Scripts use `flock` for atomic locking to prevent race conditions if multiple events fire
+5. **Hyprland configuration**:
+   - Monitor layout positions the second screen directly below the first (stacked)
+   - Touch device mappings ensure each touchscreen controls its respective display
+   - Media key bindings provide Super+F-key shortcuts since the Fn key doesn't work properly
 
 ## Why the Kernel Fix Doesn't Work
 
 The kernel fix (merged in 6.11) should suppress the spurious wireless toggle events from the `asus-nb-wmi` driver. However, even on kernel 6.16+, the fix doesn't reliably work on all Zenbook Duo units. This udev-based solution is more reliable and works regardless of kernel version.
 
+## Features Summary
+
+✅ **WiFi persistence** - Automatically maintains WiFi connection during keyboard attach/detach
+✅ **Smart dual-screen** - Second screen auto-enables when keyboard removed, auto-disables when attached
+✅ **Touch input mapping** - Each touchscreen correctly mapped to its display
+✅ **Stacked layout** - Monitors positioned top/bottom for natural tablet mode
+✅ **Media key support** - Super+F-key bindings for volume, brightness, mute (since Fn doesn't work)
+✅ **Visual feedback** - OSD popups for all media controls
+✅ **Desktop notifications** - Know exactly when keyboard events occur
+✅ **Zero overhead** - Event-driven, no background processes
+
 ## Credits
 
-Solution developed for ASUS Zenbook Duo UX8406MA running Arch Linux with Hyprland/Omarchy.
+Complete setup developed for ASUS Zenbook Duo UX8406MA running Arch Linux with Hyprland/Omarchy.
+
+Tested on:
+- Kernel: 6.16.8-arch3-1
+- Displays: 2x 2880x1800@120Hz (Samsung)
+- Omarchy (Arch-based Hyprland distribution)
 
 ## License
 
 Public domain. Use freely, modify as needed, share with others.
+
+## Contributing
+
+Found an improvement or bug fix? Share it! This guide is meant to be a community resource for Zenbook Duo Linux users.
