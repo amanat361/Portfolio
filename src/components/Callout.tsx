@@ -8,7 +8,7 @@ export function Callout({ title, children }: { title?: string; children: React.R
           {title}
         </h3>
       )}
-      <div className="pl-4 border-l-2 border-teal-500/30 dark:border-teal-400/30" style={{ color: 'var(--tw-prose-body, #4b5563)' }}>
+      <div className="pl-4 border-l-2 border-primary/30" style={{ color: 'var(--tw-prose-body, #4b5563)' }}>
         {children}
       </div>
     </div>

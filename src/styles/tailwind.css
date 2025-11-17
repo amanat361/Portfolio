@@ -6,7 +6,136 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  :root {
+    --background: oklch(0.9900 0 0);
+    --foreground: oklch(0 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0 0 0);
+    --popover: oklch(0.9900 0 0);
+    --popover-foreground: oklch(0 0 0);
+    --primary: oklch(0 0 0);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.9400 0 0);
+    --secondary-foreground: oklch(0 0 0);
+    --muted: oklch(0.9700 0 0);
+    --muted-foreground: oklch(0.4400 0 0);
+    --accent: oklch(0.9400 0 0);
+    --accent-foreground: oklch(0 0 0);
+    --destructive: oklch(0.6300 0.1900 23.0300);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.9200 0 0);
+    --input: oklch(0.9400 0 0);
+    --ring: oklch(0 0 0);
+    --code-bg: oklch(0.9700 0 0);
+    --radius: 0.5rem;
+
+    /* Geist fonts are loaded via next/font and available as CSS variables */
+
+    /* Ray.so code colors for light mode */
+    --ray-foreground: hsla(0, 0%, 9%, 1);
+    --ray-token-constant: oklch(53.18% 0.2399 256.99);
+    --ray-token-string: oklch(51.75% 0.1453 147.65);
+    --ray-token-comment: hsla(0, 0%, 40%, 1);
+    --ray-token-keyword: oklch(53.5% 0.2058 2.84);
+    --ray-token-parameter: oklch(52.79% 0.1496 54.65);
+    --ray-token-function: oklch(47.18% 0.2579 304);
+    --ray-token-punctuation: hsla(0, 0%, 9%, 1);
+    --ray-token-number: #111111;
+    --ray-token-property: oklch(53.18% 0.2399 256.99);
+
+    /* Use colorful accents for links/interactive elements */
+    --link-color: oklch(71.7% 0.1648 250.79);
+    --link-hover: oklch(65% 0.18 250.79);
+
+    /* Grid pattern for code blocks */
+    --grid-pattern: oklch(0.92 0 0);
+    --grid-cross: oklch(0.85 0 0); /* Darker for corner crosses */
+  }
+
+  .dark {
+    --background: oklch(0 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.1400 0 0);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0.1800 0 0);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0);
+    --primary-foreground: oklch(0 0 0);
+    --secondary: oklch(0.2500 0 0);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.2300 0 0);
+    --muted-foreground: oklch(0.7200 0 0);
+    --accent: oklch(0.3200 0 0);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.6900 0.2000 23.9100);
+    --destructive-foreground: oklch(0 0 0);
+    --border: oklch(0.2600 0 0);
+    --input: oklch(0.3200 0 0);
+    --ring: oklch(0.7200 0 0);
+    --code-bg: oklch(0.2300 0 0);
+
+    /* Ray.so code colors for dark mode */
+    --ray-foreground: hsla(0, 0%, 93%, 1);
+    --ray-token-constant: oklch(71.7% 0.1648 250.79);
+    --ray-token-string: oklch(73.1% 0.2158 148.29);
+    --ray-token-comment: hsla(0, 0%, 63%, 1);
+    --ray-token-keyword: oklch(69.36% 0.2223 3.91);
+    --ray-token-parameter: oklch(77.21% 0.1991 64.28);
+    --ray-token-function: oklch(69.87% 0.2037 309.51);
+    --ray-token-punctuation: hsla(0, 0%, 93%, 1);
+    --ray-token-number: #ffffff;
+    --ray-token-property: oklch(71.7% 0.1648 250.79);
+
+    /* Use colorful accents for links/interactive elements */
+    --link-color: oklch(71.7% 0.1648 250.79);
+    --link-hover: oklch(75% 0.18 250.79);
+
+    /* Grid pattern for code blocks */
+    --grid-pattern: oklch(0.28 0 0);
+    --grid-cross: oklch(0.35 0 0); /* Lighter/brighter for corner crosses */
+  }
+
+  /* Apply monospace font to code elements */
+  code, pre, kbd, samp {
+    font-family: var(--font-geist-mono), monospace !important;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-code-bg: var(--code-bg);
+  --color-grid-pattern: var(--grid-pattern);
+  --color-grid-cross: var(--grid-cross);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
 @theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
   --text-xs: 0.8125rem;
   --text-xs--line-height: 1.5rem;
   --text-sm: 0.875rem;
