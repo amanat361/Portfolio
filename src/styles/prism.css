@@ -1,47 +1,95 @@
 pre[class*='language-'] {
-  color: theme('colors.zinc.100');
+  color: var(--ray-foreground);
+  background-color: theme('colors.code-bg');
 }
 
+/* Support both .token.class and .class formats (rehype-prism-plus uses .class) */
 .token.tag,
+.tag,
 .token.class-name,
+.class-name,
 .token.selector,
+.selector,
 .token.selector .class,
-.token.selector.class,
-.token.function {
-  color: theme('colors.pink.400');
+.token.selector.class {
+  color: var(--ray-token-constant);
+  font-weight: 500;
+}
+
+.token.function,
+.function {
+  color: var(--ray-token-function);
+  font-weight: 600;
 }
 
 .token.attr-name,
+.attr-name,
 .token.keyword,
+.keyword,
 .token.rule,
+.rule,
 .token.pseudo-class,
-.token.important {
-  color: theme('colors.zinc.300');
+.pseudo-class,
+.token.important,
+.important {
+  color: var(--ray-token-keyword);
+  font-weight: 600;
 }
 
-.token.module {
-  color: theme('colors.pink.400');
+.token.module,
+.module {
+  color: var(--ray-token-function);
+  font-weight: 600;
 }
 
 .token.attr-value,
-.token.class,
+.attr-value,
 .token.string,
-.token.property {
-  color: theme('colors.teal.300');
+.string {
+  color: var(--ray-token-string);
+  font-weight: 400;
+}
+
+.token.class,
+.class,
+.token.property,
+.property {
+  color: var(--ray-token-property);
+  font-weight: 500;
 }
 
 .token.punctuation,
-.token.attr-equals {
-  color: theme('colors.zinc.500');
+.punctuation,
+.token.attr-equals,
+.attr-equals {
+  color: var(--ray-token-punctuation);
 }
 
 .token.unit,
-.language-css .token.function {
-  color: theme('colors.sky.200');
+.unit,
+.token.number,
+.number {
+  color: var(--ray-token-number);
+  font-weight: 500;
+}
+
+.token.parameter,
+.parameter {
+  color: var(--ray-token-parameter);
+  font-weight: 400;
+}
+
+.language-css .token.function,
+.language-css .function {
+  color: var(--ray-token-function);
 }
 
 .token.comment,
+.comment,
 .token.operator,
-.token.combinator {
-  color: theme('colors.zinc.400');
+.operator,
+.token.combinator,
+.combinator {
+  color: var(--ray-token-comment);
+  font-style: italic;
 }

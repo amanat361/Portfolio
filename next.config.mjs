@@ -1,6 +1,9 @@
-import rehypePrism from '@mapbox/rehype-prism'
+import rehypePrismPlus from 'rehype-prism-plus'
+import rehypeMdxCodeProps from 'rehype-mdx-code-props'
 import nextMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -19,8 +22,12 @@ const nextConfig = {
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
+    remarkPlugins: [remarkGfm, remarkMath],
+    rehypePlugins: [
+      [rehypeKatex, { strict: false, throwOnError: false }],
+      rehypePrismPlus,
+      rehypeMdxCodeProps,
+    ],
   },
 })
 
