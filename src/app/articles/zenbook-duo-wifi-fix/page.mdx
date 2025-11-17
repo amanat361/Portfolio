@@ -17,33 +17,101 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 export function BeforeAfter() {
   return (
-    <div className="not-prose my-8 grid gap-6 sm:grid-cols-2">
-      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-6">
-        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-red-600 dark:text-red-400">
-          Issues
+    <div className="not-prose my-8 space-y-4">
+      <div className="rounded-xl border border-border bg-card p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+          <svg
+            className="h-5 w-5 text-red-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          Before (Previous Issues)
         </h3>
-        <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-          <li>WiFi disconnects when keyboard detaches</li>
-          <li>WiFi disconnects when keyboard reattaches</li>
-          <li>Second screen unusable (covered by keyboard)</li>
-          <li>Touchscreen input goes to wrong display</li>
-          <li>Media keys don't work (Fn key broken)</li>
-          <li>Manual intervention required each time</li>
+        <ul className="space-y-2 text-sm text-muted-foreground">
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>WiFi disconnects when keyboard detaches</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>WiFi disconnects when keyboard reattaches</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>Second screen unusable (covered by keyboard)</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>Touchscreen input goes to wrong display</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>Media keys don't work (Fn key broken)</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-red-500">•</span>
+            <span>Manual intervention required each time</span>
+          </li>
         </ul>
       </div>
-      <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-6">
-        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-green-600 dark:text-green-400">
-          Fixed
+      <div className="rounded-xl border border-border bg-card p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-foreground">
+          <svg
+            className="h-5 w-5 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          After (Now Working)
         </h3>
-        <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-          <li>WiFi persists automatically during all keyboard events</li>
-          <li>Second screen auto-enables when keyboard detaches</li>
-          <li>Second screen auto-disables when keyboard attaches</li>
-          <li>Touchscreens correctly mapped to their displays</li>
-          <li>Stacked monitor layout (top/bottom) configured</li>
-          <li>Media keys remapped to Super+F-keys with OSD</li>
-          <li>Desktop notifications for all events</li>
-          <li>Zero overhead (event-driven, no background processes)</li>
+        <ul className="space-y-2 text-sm text-muted-foreground">
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>WiFi persists automatically during all keyboard events</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Second screen auto-enables when keyboard detaches</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Second screen auto-disables when keyboard attaches</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Touchscreens correctly mapped to their displays</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Stacked monitor layout (top/bottom) configured</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Media keys remapped to Super+F-keys with OSD</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Desktop notifications for all events</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-0.5 text-green-500">✓</span>
+            <span>Zero overhead (event-driven, no background processes)</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -68,13 +136,13 @@ This script runs as root and handles WiFi re-enabling.
 
 Create the file:
 
-```bash
+```bash title="Terminal"
 sudo tee /usr/local/bin/zenbook-kbd-system.sh > /dev/null << 'EOF'
 ```
 
 Paste this content:
 
-```bash
+```bash title="/usr/local/bin/zenbook-kbd-system.sh"
 #!/bin/bash
 # System-level handler for Zenbook Duo keyboard events
 # Handles root-level operations (rfkill, etc.)
@@ -111,7 +179,7 @@ EOF
 
 Make it executable:
 
-```bash
+```bash title="Terminal"
 sudo chmod +x /usr/local/bin/zenbook-kbd-system.sh
 ```
 
@@ -121,14 +189,14 @@ This script runs as your user and handles notifications and other Hyprland-speci
 
 Create the directory and file:
 
-```bash
+```bash title="Terminal"
 mkdir -p ~/.local/bin
 cat > ~/.local/bin/zenbook-kbd-user.sh << 'EOF'
 ```
 
 Paste this content:
 
-```bash
+```bash title="~/.local/bin/zenbook-kbd-user.sh"
 #!/bin/bash
 # User-level handler for Zenbook Duo keyboard events
 # Handles Hyprland-specific operations (notifications, display changes, etc.)
@@ -172,7 +240,7 @@ EOF
 
 Make it executable:
 
-```bash
+```bash title="Terminal"
 chmod +x ~/.local/bin/zenbook-kbd-user.sh
 ```
 
@@ -184,7 +252,7 @@ chmod +x ~/.local/bin/zenbook-kbd-user.sh
 
 Edit `~/.config/hypr/monitors.conf` to set up the dual-screen stacked layout:
 
-```bash
+```ini title="~/.config/hypr/monitors.conf"
 # Stacked layout - second screen below first (in logical pixels accounting for 1.8 scale)
 monitor=eDP-1,2880x1800@120,0x0,1.8
 monitor=eDP-2,2880x1800@120,0x1000,1.8
@@ -196,7 +264,7 @@ The position `0x1000` places the second screen directly below the first. With 1.
 
 Edit `~/.config/hypr/input.conf` and add these device mappings at the end:
 
-```bash
+```ini title="~/.config/hypr/input.conf"
 # Map touchscreens to correct displays
 device {
   name = elan9008:00-04f3:425b
@@ -215,7 +283,7 @@ This ensures touch input on each screen registers on the correct display.
 
 Since the Fn key doesn't work with F-keys on the detached keyboard, add these bindings to `~/.config/hypr/bindings.conf`:
 
-```bash
+```ini title="~/.config/hypr/bindings.conf"
 # Media keys (Fn key doesn't work with F-keys on Zenbook Duo, using Super instead)
 bindd = SUPER, F2, Volume down, exec, swayosd-client --output-volume lower
 bindd = SUPER, F3, Volume up, exec, swayosd-client --output-volume raise
@@ -233,13 +301,13 @@ This rule triggers both scripts when the keyboard is attached or detached.
 
 Create the file:
 
-```bash
+```bash title="Terminal"
 sudo tee /etc/udev/rules.d/99-zenbook-keyboard.rules > /dev/null << 'EOF'
 ```
 
 Paste this content:
 
-```bash
+```properties title="/etc/udev/rules.d/99-zenbook-keyboard.rules"
 # ASUS Zenbook Duo Keyboard Event Handler
 # Vendor: 0b05 (ASUS), Product: 1b2c (Zenbook Duo Keyboard)
 
@@ -259,7 +327,7 @@ EOF
 
 ### 7. Reload udev rules and Hyprland config
 
-```bash
+```bash title="Terminal"
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 hyprctl reload
@@ -285,7 +353,7 @@ hyprctl reload
 
 Check the logs to verify it's working:
 
-```bash
+```bash title="Terminal"
 journalctl -n 50 --no-pager | grep -E "Zenbook-"
 ```
 
@@ -299,7 +367,7 @@ You should see entries like:
 
 Edit `~/.local/bin/zenbook-kbd-user.sh` and comment out or remove the `notify-send` lines:
 
-```bash
+```bash title="Example"
 # notify-send "Zenbook KB Detached" "Second screen enabled" -u low
 ```
 
@@ -311,7 +379,7 @@ If you want to keep the second screen always enabled (not auto-toggle), edit `~/
 
 To change from stacked (top/bottom) to side-by-side, edit `~/.config/hypr/monitors.conf`:
 
-```bash
+```ini title="~/.config/hypr/monitors.conf"
 # Side-by-side layout
 monitor=eDP-1,2880x1800@120,0x0,1.8
 monitor=eDP-2,2880x1800@120,1600x0,1.8  # Position to the right (1600 = 2880/1.8)
@@ -322,35 +390,41 @@ monitor=eDP-2,2880x1800@120,1600x0,1.8  # Position to the right (1600 = 2880/1.8
 You can add any commands in the user script. Examples:
 
 **Rotate display when detaching:**
-```bash
-remove)
-    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
-    hyprctl keyword monitor eDP-1,transform,1  # Rotate to portrait
-    notify-send "Zenbook KB Detached" "Second screen enabled" -u low
-    ;;
+```bash title="Example script modification"
+case "$ACTION" in
+    remove)
+        hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
+        hyprctl keyword monitor eDP-1,transform,1  # Rotate to portrait
+        notify-send "Zenbook KB Detached" "Second screen enabled" -u low
+        ;;
+esac
 ```
 
 **Switch workspace layout:**
-```bash
-remove)
-    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
-    hyprctl keyword general:layout dwindle  # Switch to tablet-friendly layout
-    notify-send "Zenbook KB Detached" "Tablet mode" -u low
-    ;;
+```bash title="Example script modification"
+case "$ACTION" in
+    remove)
+        hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
+        hyprctl keyword general:layout dwindle  # Switch to tablet-friendly layout
+        notify-send "Zenbook KB Detached" "Tablet mode" -u low
+        ;;
+esac
 ```
 
 **Launch/close apps:**
-```bash
-remove)
-    hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
-    killall waybar  # Hide status bar in tablet mode
-    notify-send "Zenbook KB Detached" "Second screen enabled" -u low
-    ;;
-add)
-    hyprctl keyword monitor eDP-2,disable
-    waybar &  # Show status bar with keyboard
-    notify-send "Zenbook KB Attached" "Second screen disabled" -u low
-    ;;
+```bash title="Example script modification"
+case "$ACTION" in
+    remove)
+        hyprctl keyword monitor eDP-2,2880x1800@120,0x1000,1.8
+        killall waybar  # Hide status bar in tablet mode
+        notify-send "Zenbook KB Detached" "Second screen enabled" -u low
+        ;;
+    add)
+        hyprctl keyword monitor eDP-2,disable
+        waybar &  # Show status bar with keyboard
+        notify-send "Zenbook KB Attached" "Second screen disabled" -u low
+        ;;
+esac
 ```
 
 ### Multi-monitor workspaces
@@ -366,13 +440,13 @@ In Hyprland, each monitor has **independent workspaces**. With dual screens enab
 ### WiFi still gets disabled
 
 1. Check if the scripts are being triggered:
-   ```bash
+   ```bash title="Terminal"
    journalctl -f | grep Zenbook
    ```
    Then detach/attach the keyboard and watch for log entries.
 
 2. If you don't see any logs, the udev rule might not be matching. Check your USB device IDs:
-   ```bash
+   ```bash title="Terminal"
    lsusb | grep -i asus
    ```
    Make sure it shows `0b05:1b2c`. If different, update the udev rule.
@@ -383,7 +457,7 @@ In Hyprland, each monitor has **independent workspaces**. With dual screens enab
 
 - Make sure you're running a notification daemon (mako, dunst, or swaync)
 - Check if `notify-send` works manually:
-  ```bash
+  ```bash title="Terminal"
   notify-send "Test" "Hello"
   ```
 
@@ -395,7 +469,7 @@ If you see permission errors in logs, you might not be in the sudoers file. The 
 
 If touches on the second screen register on the first screen (or vice versa), the device names might be different. Check your touchscreen devices:
 
-```bash
+```bash title="Terminal"
 hyprctl devices | grep -A 2 "Touch:"
 ```
 
@@ -405,7 +479,7 @@ Update the device names in `~/.config/hypr/input.conf` to match your output.
 
 The brightness commands target `intel_backlight` for the main screen. If your system uses a different backlight device, check available devices:
 
-```bash
+```bash title="Terminal"
 ls /sys/class/backlight/
 ```
 
