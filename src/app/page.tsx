@@ -6,7 +6,7 @@ import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import Piano from '@/components/Piano'
-import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/SocialIcons'
+import { GitHubIcon, LinkedInIcon, XIcon } from '@/components/SocialIcons'
 import logoNovl from '@/images/logos/novl.png'
 import logoFirewave from '@/images/logos/firewave.png'
 import logoTheCoderSchool from '@/images/logos/theCoderSchool.png'
@@ -330,7 +330,7 @@ export default async function Home() {
             <SocialLink
               href="https://twitter.com/amanat361"
               aria-label="Follow on Twitter"
-              icon={TwitterIcon}
+              icon={XIcon}
             />
             <SocialLink
               href="https://github.com/amanat361"

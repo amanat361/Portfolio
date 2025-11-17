@@ -9,7 +9,7 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  TwitterIcon,
+  XIcon,
 } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 
@@ -122,7 +122,7 @@ export default function About() {
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="https://twitter.com/amanat361" icon={TwitterIcon}>
+            <SocialLink href="https://twitter.com/amanat361" icon={XIcon}>
               Follow on Twitter
             </SocialLink>
             <SocialLink
