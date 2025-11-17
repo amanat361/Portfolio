@@ -8,6 +8,12 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/articles/*': ['./src/app/articles/**/*.mdx'],
   },
+  // Suppress searchParams warning in dev mode (Next.js 15 internal debugging)
+  logging: {
+    fetches: {
+      fullUrl: false,
+    },
+  },
 }
 
 const withMDX = nextMDX({
