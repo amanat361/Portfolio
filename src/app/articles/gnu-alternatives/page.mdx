@@ -8,20 +8,199 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 Here are some good alternatives to common GNU tools that are faster and have better defaults.
 
-**du → dust**  
-`du` shows disk usage but the output is hard to parse. `dust` gives you a visual representation with colored bars that make it easy to see what’s eating your storage at a glance.
+## Installation
 
-**ls → eza**  
-`ls` lists files but it’s plain and limited. `eza` is a modernized version with colors, git status integration, tree views, and human-readable file sizes built in.
+Install all of these at once:
 
-**tar → ouch**  
-`tar` handles archives but the syntax is notoriously clunky. `ouch` is user-friendly and supports multiple formats with simpler commands that actually make sense.
+```shell title="Terminal"
+bun install -g dust eza ouch fd-find ripgrep zoxide
+```
 
-**find → fd**  
-`find` locates files but the syntax is verbose and unintuitive. `fd` is faster and simpler, supports regex, has color output, and better defaults without sacrificing power.
+Or install them individually as needed in the sections below.
 
-**grep → ripgrep**  
-`grep` searches text but it’s slower on large codebases. `ripgrep` is blazing fast, optimized for code, respects .gitignore files, and supports richer options without complex flags.
+## du → dust
 
-**cd → zoxide**  
-`cd` is basic directory navigation with no memory. `zoxide` is a smart directory jumper that remembers frequently used paths and lets you jump with fuzzy matching, reducing keystrokes.
+`du` shows disk usage but the output is hard to parse. `dust` gives you a visual representation with colored bars that make it easy to see what's eating your storage.
+
+```shell title="Terminal"
+bun install -g dust
+```
+
+**Before (`du`):**
+```shell title="Terminal"
+du -h | sort -h | tail
+```
+```
+4.0K    ./src/components
+8.0K    ./src/styles
+12K     ./src/app/articles
+156K    ./src/app
+512K    ./node_modules/react
+2.1M    ./node_modules
+```
+
+**After (`dust`):**
+```shell title="Terminal"
+dust
+```
+```
+2.1M  ┌── node_modules     │███████████████████████████████  │ 89%
+156K  ├── src              │█                                │  7%
+ 12K  │  ├── app           │███████████████████████          │ 77%
+4.0K  │  ├── components    │████                             │ 17%
+ 32K  ├── public           │█                                │  1%
+```
+
+## ls → eza
+
+`ls` lists files but it's plain and limited. `eza` is a modernized version with colors, git status integration, and tree views built in.
+
+```shell title="Terminal"
+bun install -g eza
+```
+
+**Before (`ls -lh`):**
+```shell title="Terminal"
+ls -lh
+```
+```
+-rw-r--r-- 1 sam sam 1.2K Nov 16 10:30 README.md
+-rw-r--r-- 1 sam sam  856 Nov 15 14:22 package.json
+drwxr-xr-x 5 sam sam 4.0K Nov 16 09:45 src
+drwxr-xr-x 8 sam sam 4.0K Nov 14 18:30 node_modules
+```
+
+**After (`eza -lh --git`):**
+```shell title="Terminal"
+eza -lh --git
+```
+```
+.rw-r--r-- 1.2k sam 16 Nov 10:30 -M README.md
+.rw-r--r--  856 sam 15 Nov 14:22 -- package.json
+drwxr-xr-x    - sam 16 Nov 09:45 N- src
+drwxr-xr-x    - sam 14 Nov 18:30 -- node_modules
+```
+
+Use `eza -T` for a tree view, or add an alias:
+```bash title="~/.bashrc or ~/.zshrc"
+alias ls='eza'
+alias ll='eza -lh --git'
+alias tree='eza -T'
+```
+
+## tar → ouch
+
+`tar` handles archives but the syntax is clunky. `ouch` supports multiple formats with simpler commands.
+
+```shell title="Terminal"
+bun install -g ouch
+```
+
+**Before (`tar`):**
+```shell title="Terminal"
+# Compress
+tar -czvf archive.tar.gz folder/
+
+# Extract
+tar -xzvf archive.tar.gz
+
+# Different format? Different flags
+zip -r archive.zip folder/
+unzip archive.zip
+```
+
+**After (`ouch`):**
+```shell title="Terminal"
+# Compress (format auto-detected from extension)
+ouch compress folder archive.tar.gz
+
+# Extract (format auto-detected)
+ouch decompress archive.tar.gz
+
+# Works the same for any format
+ouch compress folder archive.zip
+ouch decompress archive.zip
+```
+
+## find → fd
+
+`find` locates files but the syntax is verbose. `fd` is faster and simpler with better defaults.
+
+```shell title="Terminal"
+bun install -g fd-find
+```
+
+**Before (`find`):**
+```shell title="Terminal"
+# Find TypeScript files
+find . -name "*.ts" -type f
+
+# Find and exclude node_modules
+find . -name "*.ts" -type f -not -path "*/node_modules/*"
+```
+
+**After (`fd`):**
+```shell title="Terminal"
+# Find TypeScript files (auto-excludes .gitignore entries)
+fd .ts
+
+# Case-insensitive search
+fd -i readme
+```
+
+## grep → ripgrep
+
+`grep` searches text but it's slow on large codebases. `ripgrep` is blazing fast and respects `.gitignore`.
+
+```shell title="Terminal"
+bun install -g ripgrep
+```
+
+**Before (`grep`):**
+```shell title="Terminal"
+# Search for pattern
+grep -r "useState" .
+
+# Exclude node_modules manually
+grep -r "useState" --exclude-dir=node_modules .
+```
+
+**After (`rg`):**
+```shell title="Terminal"
+# Search (auto-excludes .gitignore entries)
+rg "useState"
+
+# Show context lines
+rg -C 3 "useState"
+```
+
+## cd → zoxide
+
+`cd` is basic directory navigation. `zoxide` remembers frequently used paths and lets you jump with fuzzy matching.
+
+```shell title="Terminal"
+bun install -g zoxide
+```
+
+Add to your shell config:
+```bash title="~/.bashrc or ~/.zshrc"
+eval "$(zoxide init bash)"  # or zsh/fish
+```
+
+**Before (`cd`):**
+```shell title="Terminal"
+cd ~/Documents/Repositories/Portfolio/src/components
+cd ~/Documents/Repositories/Portfolio/src/app/articles
+cd ~/Documents/Repositories/Portfolio/src/styles
+```
+
+**After (`z`):**
+```shell title="Terminal"
+# After visiting once, jump with fuzzy match
+z comp      # → ~/Documents/Repositories/Portfolio/src/components
+z art       # → ~/Documents/Repositories/Portfolio/src/app/articles
+z sty       # → ~/Documents/Repositories/Portfolio/src/styles
+
+# Or just part of the path
+z portfolio comp
+```
