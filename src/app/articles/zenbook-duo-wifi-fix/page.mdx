@@ -15,36 +15,66 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
+export function BeforeAfter() {
+  return (
+    <div className="not-prose my-8 grid gap-6 sm:grid-cols-2">
+      <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-6">
+        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-red-600 dark:text-red-400">
+          Issues
+        </h3>
+        <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+          <li>WiFi disconnects when keyboard detaches</li>
+          <li>WiFi disconnects when keyboard reattaches</li>
+          <li>Second screen unusable (covered by keyboard)</li>
+          <li>Touchscreen input goes to wrong display</li>
+          <li>Media keys don't work (Fn key broken)</li>
+          <li>Manual intervention required each time</li>
+        </ul>
+      </div>
+      <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-6">
+        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-green-600 dark:text-green-400">
+          Fixed
+        </h3>
+        <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+          <li>WiFi persists automatically during all keyboard events</li>
+          <li>Second screen auto-enables when keyboard detaches</li>
+          <li>Second screen auto-disables when keyboard attaches</li>
+          <li>Touchscreens correctly mapped to their displays</li>
+          <li>Stacked monitor layout (top/bottom) configured</li>
+          <li>Media keys remapped to Super+F-keys with OSD</li>
+          <li>Desktop notifications for all events</li>
+          <li>Zero overhead (event-driven, no background processes)</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
 ## The Problem
 
 On the ASUS Zenbook Duo (UX8406MA), detaching the keyboard triggers a spurious wireless disable event that turns off WiFi. This is a known Linux kernel bug. While a fix was merged into kernel 6.11+, it doesn't work reliably on all systems.
 
-**Symptoms:**
-- WiFi turns off when you detach the keyboard
-- WiFi may also turn off when you reattach the keyboard
-- You have to manually re-enable WiFi each time
+<BeforeAfter />
 
 ## The Solution
 
-This is a complete setup for the Zenbook Duo that handles keyboard attach/detach events intelligently.
-
-**What it does:**
-- Automatically unblocks WiFi (rfkill) when keyboard events happen
-- Automatically enables/disables the second screen based on keyboard state
-- Properly maps touchscreen inputs to the correct displays
-- Provides desktop notifications for all events
-- Configures stacked monitor layout (top/bottom) for dual-screen mode
-- Sets up media key bindings (volume, brightness, etc.)
-- Runs efficiently with zero overhead when idle (event-driven, no background processes)
+This is a complete setup for the Zenbook Duo that handles keyboard attach/detach events intelligently and solves all the issues above.
 
 ## Installation
 
 ### 1. Create the system handler script
 
-This script runs as root and handles WiFi re-enabling:
+This script runs as root and handles WiFi re-enabling.
+
+Create the file:
 
 ```bash
 sudo tee /usr/local/bin/zenbook-kbd-system.sh > /dev/null << 'EOF'
+```
+
+Paste this content:
+
+```bash
 #!/bin/bash
 # System-level handler for Zenbook Duo keyboard events
 # Handles root-level operations (rfkill, etc.)
@@ -77,18 +107,28 @@ esac
 # Hold the lock briefly so other instances will skip
 sleep 0.5
 EOF
+```
 
+Make it executable:
+
+```bash
 sudo chmod +x /usr/local/bin/zenbook-kbd-system.sh
 ```
 
 ### 2. Create the user handler script
 
-This script runs as your user and handles notifications and other Hyprland-specific actions:
+This script runs as your user and handles notifications and other Hyprland-specific actions.
+
+Create the directory and file:
 
 ```bash
 mkdir -p ~/.local/bin
-
 cat > ~/.local/bin/zenbook-kbd-user.sh << 'EOF'
+```
+
+Paste this content:
+
+```bash
 #!/bin/bash
 # User-level handler for Zenbook Duo keyboard events
 # Handles Hyprland-specific operations (notifications, display changes, etc.)
@@ -128,7 +168,11 @@ esac
 # Hold the lock briefly so other instances will skip
 sleep 0.5
 EOF
+```
 
+Make it executable:
+
+```bash
 chmod +x ~/.local/bin/zenbook-kbd-user.sh
 ```
 
@@ -185,10 +229,17 @@ This uses `swayosd-client` for visual OSD popups (Omarchy default). If you don't
 
 ### 6. Create the udev rule
 
-This rule triggers both scripts when the keyboard is attached or detached:
+This rule triggers both scripts when the keyboard is attached or detached.
+
+Create the file:
 
 ```bash
 sudo tee /etc/udev/rules.d/99-zenbook-keyboard.rules > /dev/null << 'EOF'
+```
+
+Paste this content:
+
+```bash
 # ASUS Zenbook Duo Keyboard Event Handler
 # Vendor: 0b05 (ASUS), Product: 1b2c (Zenbook Duo Keyboard)
 
@@ -385,17 +436,6 @@ This is a Bluetooth pairing issue. The keyboard connects via Bluetooth when deta
 ## Why the Kernel Fix Doesn't Work
 
 The kernel fix (merged in 6.11) should suppress the spurious wireless toggle events from the `asus-nb-wmi` driver. However, even on kernel 6.16+, the fix doesn't reliably work on all Zenbook Duo units. This udev-based solution is more reliable and works regardless of kernel version.
-
-## Features Summary
-
-✅ **WiFi persistence** - Automatically maintains WiFi connection during keyboard attach/detach
-✅ **Smart dual-screen** - Second screen auto-enables when keyboard removed, auto-disables when attached
-✅ **Touch input mapping** - Each touchscreen correctly mapped to its display
-✅ **Stacked layout** - Monitors positioned top/bottom for natural tablet mode
-✅ **Media key support** - Super+F-key bindings for volume, brightness, mute (since Fn doesn't work)
-✅ **Visual feedback** - OSD popups for all media controls
-✅ **Desktop notifications** - Know exactly when keyboard events occur
-✅ **Zero overhead** - Event-driven, no background processes
 
 ## Credits
 
