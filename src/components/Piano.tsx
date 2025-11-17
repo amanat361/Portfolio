@@ -74,10 +74,10 @@ export default function Piano() {
   return (
     <React.Fragment>
       <div className="m-2 flex flex-row justify-end gap-4">
-        <h1 className="text-xl text-zinc-900 dark:text-zinc-300">
+        <h1 className="font-mono tabular-nums text-xl text-zinc-900 dark:text-zinc-300">
           Score: {score}
         </h1>
-        <h1 className="text-xl text-zinc-900 dark:text-zinc-300">
+        <h1 className="font-mono tabular-nums text-xl text-zinc-900 dark:text-zinc-300">
           Timer: {timer.toFixed(1)}
         </h1>
       </div>
