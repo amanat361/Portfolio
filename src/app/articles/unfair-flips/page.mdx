@@ -1,0 +1,153 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import cover from './cover.png'
+import luckFactor from './game_luck_factor.png'
+import frustrationFactor from './game_frustration_factor.png'
+import skewRatio from './game_skew_ratio.png'
+import diminishingReturns from './game_diminishing_returns.png'
+import cumulativeSpeedup from './game_cumulative_speedup.png'
+
+export const article = {
+  author: 'Sam Amanat',
+  date: '2025-11-16',
+  title: 'I Flipped 3 Billion Coins So You Don\'t Have To',
+  description:
+    'A mathematical breakdown of the "Unfair Flips" game. Spoiler: at 20% probability, you\'re looking at 266 days of clicking. I ran the numbers so you\'d know exactly how screwed you are.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={cover} alt="" />
+
+My heads chance was sitting at 55%. I'd been clicking for what felt like forever, watching my streak counter reset over and over. "How much longer is this gonna take?" I muttered, staring at my measly 7-combo that just got wiped by a single tails.
+
+So I did what any reasonable person would do: I wrote a simulator in Rust and flipped 3 billion virtual coins to figure out exactly how screwed I was.
+
+## The Setup
+
+In **Unfair Flips**, you start with a pathetic 20% chance of heads and need to get 10 consecutive heads to win. Each flip takes 2 seconds. You can upgrade your head probability by 5% increments up to 60%. Sounds simple. It's not.
+
+Here's how long you'll be clicking at each upgrade level:
+
+| Head Chance | Flips to Win | Real Time |
+|-------------|-------------|-----------|
+| **20% (start)** | 11,511,628 | **266 days** |
+| 25% | 1,287,695 | 30 days |
+| 30% | 257,589 | 6 days |
+| 35% | 55,159 | 31 hours |
+| 40% | 16,170 | 9 hours |
+| 45% | 5,322 | 3 hours |
+| **50%** | 2,054 | **68 minutes** |
+| 55% | 875 | 29 minutes |
+| **60% (max)** | 411 | **14 minutes** |
+
+Let that sink in. At 20%, you're looking at clicking a button for **266 straight days**. That's not a typo. That's not an exaggeration. That's the actual math telling you to quit the game and go touch grass.
+
+Your first upgrade isn't just helpful—it's the difference between "I'll finish this eventually" and "I should write this into my will." Here's what each +5% upgrade buys you:
+
+| Upgrade | Speedup |
+|---------|---------|
+| 20% → 25% | **8.94x faster** |
+| 25% → 30% | 5.00x faster |
+| 30% → 35% | 4.67x faster |
+| 35% → 40% | 3.41x faster |
+| 40% → 45% | 3.04x faster |
+| 45% → 50% | 2.59x faster |
+| 50% → 55% | 2.35x faster |
+| 55% → 60% | 2.13x faster |
+
+That first upgrade isn't just good—it's **nearly 9x faster**. The value of upgrades decreases as you go higher, but they're all worth it. Going from 20% to 60% makes you **28,034 times faster**. Twenty-eight *thousand* times faster. I can't even comprehend what that means. That's like comparing walking to teleportation.
+
+## The Math Behind the Misery
+
+Here's the formula for expected flips to get k consecutive heads with probability p:
+
+```
+E[k] = (1/p) + (1/p)² + (1/p)³ + ... + (1/p)^k
+```
+
+For 10 consecutive heads at 20%, you're looking at 1/p = 5, which means E[10] = 5 + 25 + 125 + ... + 5^10 ≈ **12.2 million flips**. At 50%, it's 1/p = 2, so E[10] = 2 + 4 + 8 + ... + 1024 ≈ **2,046 flips**. Every percentage point matters because you're raising numbers to the 10th power. Small changes compound into massive differences that will make you question your life choices.
+
+Common misconception time: "The probability of 10 heads is (0.5)^10 = 0.098%, so I should see it once every ~1000 flips." **Wrong.** That's the probability of getting 10 heads on your next 10 flips specifically. We're asking a completely different question: "How many flips until I *first* see a streak of 10?" That involves expected waiting times and Markov chains and all sorts of probability theory that makes your head hurt.
+
+At 50%, the answer isn't 1,024 flips—it's 2,046. Almost exactly double. The extra flips account for all the failed attempts where you get 7, 8, 9 heads then hit tails and have to start over. You know, that thing that happens constantly and makes you want to throw your mouse through the monitor.
+
+Even if you're not shooting for 10, combos still matter for points. Here's what to expect:
+
+| Combo | 20% | 40% | 60% |
+|-------|-----|-----|-----|
+| 3x | 145 flips (5 min) | 10 flips (20 sec) | 5 flips (10 sec) |
+| 5x | 3,905 flips (2.2 hr) | 78 flips (2.6 min) | 20 flips (40 sec) |
+| 7x | 97,655 flips (2.3 days) | 609 flips (20 min) | 77 flips (2.6 min) |
+| 10x | 12.2M flips (282 days) | 16,170 flips (9 hr) | 411 flips (14 min) |
+
+At 20%, even a 5x combo takes over 2 hours on average. At 60%, you'll see 7x combos every few minutes. This is why starting the game feels like punishment.
+
+## Optimal Strategy
+
+Based on the math, **rush probability upgrades**. Nothing else matters until you hit at least 40%. Don't expect combos early. At 20-30%, you'll spend most of your time seeing 1s, 2s, and 3s. A 5x combo is a rare celebration worth screenshotting because you won't see another one for hours.
+
+The 40% threshold is where the game becomes "playable." 9 hours to win is long but not insane. 50% is the sweet spot—just over an hour to win. Most runs should aim here before pushing for 60%. And 60% is luxury. Nice to have, but the jump from 55% to 60% only saves you 15 minutes. Earlier upgrades are way more impactful.
+
+## What Theory Can't Tell You
+
+Here's where it gets *really* interesting. The theoretical formula gives you the **average**. But in reality, you might be way luckier or way unluckier than average. At 20% chance, for 10 consecutive heads, the mean is 11.5 million flips but the standard deviation is 13.8 million flips. The standard deviation is **larger than the mean itself**. That means massive variance. Some runs take over 6x longer than average. You could be the unlucky soul.
+
+| Probability | Avg Flips | Luckiest Run | Unluckiest Run | Variance Factor |
+|-------------|-----------|--------------|----------------|-----------------|
+| 20% | 11.5M | 241k (48x faster) | 75.8M (6.6x slower) | 315x spread |
+| 50% | 2,054 | 173 (12x faster) | 17,393 (8.5x slower) | 100x spread |
+| 60% | 411 | 26 (16x faster) | 3,445 (8.4x slower) | 132x spread |
+
+At 20%, the luckiest person finished in 241,055 flips while the unluckiest needed **75,821,268 flips**. That's a 315x difference between best and worst case. Imagine being that unlucky person. Imagine the despair.
+
+The median vs mean situation is also brutal. At 20%, the mean is 11.5M flips (266 days) but the median is 6.7M flips (155 days). The median is **42% lower** than the mean. This distribution is heavily right-skewed. Half of players will finish faster than 155 days, but some unlucky souls drag the average way up. You'll probably beat the average. But if you're unlucky, you'll be waiting a LONG time while questioning every decision that led you to this moment.
+
+The coefficient of variation (std/mean) tells us how "frustrating" each probability level is:
+
+| Probability | CV (Std/Mean) |
+|-------------|---------------|
+| 20% | 1.20 (120%) |
+| 40% | 0.98 (98%) |
+| 60% | 1.00 (100%) |
+
+A CV over 100% means the standard deviation exceeds the mean. All probability levels have extremely high variance. **You cannot predict how long you'll wait.** The theoretical average is just a rough guide. For all you know, you're the outlier who gets to suffer extra.
+
+Because the distribution is geometric-like, your expected remaining time is always the same, no matter how long you've been trying. If you've been clicking for 30 minutes at 50% and haven't won yet, your expected time to win is *still* ~68 minutes. Your past failures don't bring you any closer to success. This is the mathematically justified version of "this slot machine is due to pay out!" Except it's not due. It was never due. You've been lied to by probability.
+
+<Image src={luckFactor} alt="Luck factor showing massive spread between best and worst runs" />
+
+The spread between luckiest and unluckiest runs is massive at every probability level. Someone's getting lucky while you suffer.
+
+<Image src={frustrationFactor} alt="Frustration factor showing coefficient of variation over 100%" />
+
+Coefficient of variation over 100% means the standard deviation exceeds the average—extremely unpredictable. Welcome to hell.
+
+<Image src={skewRatio} alt="Skew ratio showing mean consistently higher than median" />
+
+The mean is consistently higher than the median, meaning unlucky outliers drag up the average. You might be that outlier.
+
+<Image src={diminishingReturns} alt="Diminishing returns of upgrades" />
+
+Early upgrades give huge speedups; later ones help but matter less. Get to 40% before you do anything else.
+
+<Image src={cumulativeSpeedup} alt="Cumulative speedup from upgrades" />
+
+From 20% to 60%: a staggering 28,000x improvement. This chart is the only reason I kept playing.
+
+## How I Computed This
+
+I wrote a Rust program that simulates flipping until 10 consecutive heads, records when each streak (1-10) first occurs, runs thousands of trials per probability level, and uses parallel processing across all CPU cores. Performance stats: **3 billion coin flips simulated**, **1.03 billion flips per second**, **3 seconds total computation time**. Lower probabilities need fewer trials because each trial takes millions of flips. At 20%, each simulated "game" required ~12 million flips on average.
+
+The results match theoretical predictions within a few percent, confirming both the math and the simulation. Which means all of this is real. None of this is a mistake. The suffering is intentional.
+
+## The Verdict
+
+If you're stuck at 55% wondering how long until you win: **29 minutes average**. But that's just the average. You might get lucky in 5 minutes. You might also go an hour. Probability is cruel like that. At least now you know: you're not unlucky. You're just experiencing exactly what the math predicted.
+
+And if you're still at 20%, put the game down and go outside. 266 days is not a typo. It's a warning.
